@@ -1,6 +1,6 @@
 .header {
-  background-color: #023530;
-  color: whitesmoke;
+  background-color: var(--main-color);
+  color: var(--text-color);
   padding: 2rem;
   font-size: 2rem;
   text-align: center;
