@@ -1,9 +1,10 @@
+import Page from 'components/Page';
 import React from 'react';
 import './styles.css';
 
 class Cards extends React.Component {
   render() {
-    return <div className="cards">Cards</div>;
+    return <Page className="cards" name="Cards" />;
   }
 }
 
