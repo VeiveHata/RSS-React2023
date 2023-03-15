@@ -1,6 +1,8 @@
+import Card from 'components/Card';
 import Input from 'components/Input';
 import Page from 'components/Page';
 import React from 'react';
+import { mangaList } from './cardsMoch';
 import './styles.css';
 
 type CardsProps = {
@@ -16,6 +18,11 @@ class Cards extends React.Component<CardsProps> {
     return (
       <Page className="cards" name="Cards">
         <Input onSearch={this.onSearch} name="cardsSearch" withSave />
+        <div className="cards-wrapper">
+          {mangaList.map((manga) => (
+            <Card manga={manga} key={manga.id} />
+          ))}
+        </div>
       </Page>
     );
   }
