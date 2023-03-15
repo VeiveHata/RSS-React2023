@@ -7,24 +7,15 @@ type CardsProps = {
   list: [unknown];
 };
 
-type CardsState = {
-  defaultInputValue: string;
-};
-
-class Cards extends React.Component<CardsProps, CardsState> {
-  state = {
-    defaultInputValue: '123',
-  };
-
+class Cards extends React.Component<CardsProps> {
   onSearch = (value: string) => {
     console.log(value);
   };
 
   render() {
-    const { defaultInputValue } = this.state;
     return (
       <Page className="cards" name="Cards">
-        <Input defaultValue={defaultInputValue} onSearch={this.onSearch} />
+        <Input onSearch={this.onSearch} name="cardsSearch" withSave />
       </Page>
     );
   }
