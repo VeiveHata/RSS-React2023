@@ -49,12 +49,12 @@ class Card extends React.Component<CardProps> {
         <div className="card-content">
           <Title titles={titles} canonicalTitle={canonicalTitle} />
           <section className="description">{synopsis || description}</section>
-          <ConditionalRender condition={Boolean(serialization)}>
-            <section className="card-footer">
+          <section className="card-footer">
+            <ConditionalRender condition={Boolean(serialization)}>
               <h5 className="serialization">{serialization}</h5>
-              <VolumeInfo chapterCount={chapterCount} volumeCount={volumeCount} />
-            </section>
-          </ConditionalRender>
+            </ConditionalRender>
+            <VolumeInfo chapterCount={chapterCount} volumeCount={volumeCount} />
+          </section>
         </div>
       </div>
     );

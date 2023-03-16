@@ -80,7 +80,8 @@
   padding-top: 0.4rem;
   font-size: 0.8rem;
   display: flex;
-  gap: 1rem;
+  gap: 0.6rem;
+  margin-left: auto;
 }
 
 .count {
