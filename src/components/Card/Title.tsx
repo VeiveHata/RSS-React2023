@@ -1,3 +1,4 @@
+import { ConditionalRender } from 'components/ConditionalRender';
 import React from 'react';
 import { TitleLanguage, Titles } from 'types/manga';
 
@@ -24,13 +25,17 @@ class Title extends React.Component<TitleProps> {
     const translatedTitle = getTitle(titles);
     return (
       <>
-        {translatedTitle && <h4 className="title">{translatedTitle}</h4>}
-        {originalTitle && canonical && (
+        <ConditionalRender condition={Boolean(translatedTitle)}>
+          <h4 className="title">{translatedTitle}</h4>
+        </ConditionalRender>
+        <ConditionalRender condition={Boolean(originalTitle && canonical)}>
           <h4 className="title">
             {originalTitle} <span className="canonical-title">({canonical})</span>
           </h4>
-        )}
-        {originalTitle && !canonical && <h4 className="title">{originalTitle}</h4>}
+        </ConditionalRender>
+        <ConditionalRender condition={!!originalTitle && !canonical}>
+          <h4 className="title">{originalTitle}</h4>
+        </ConditionalRender>
       </>
     );
   }
