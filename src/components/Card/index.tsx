@@ -1,45 +1,40 @@
 import React from 'react';
 import { Manga, Poster, PosterSize, TitleLanguage, Titles } from 'types/manga';
 import './styles.css';
+import Title from './Title';
 
 type CardProps = {
   manga: Manga;
 };
 
-const getTitle = (titles: Titles) => {
-  const languages: TitleLanguage[] = [
-    TitleLanguage.en,
-    TitleLanguage.en_us,
-    TitleLanguage.en_us,
-    TitleLanguage.ja_jp,
-  ];
-  const titleLanguage = languages.find((lang) => titles[lang]) || TitleLanguage.en;
-  return titles[titleLanguage];
-};
-
+const posterSizes: PosterSize[] = [
+  PosterSize.medium,
+  PosterSize.original,
+  PosterSize.small,
+  PosterSize.small_webp,
+];
 const getPoster = (poster: Poster) => {
-  const posterSizes: PosterSize[] = [
-    PosterSize.medium,
-    PosterSize.original,
-    PosterSize.small,
-    PosterSize.small_webp,
-  ];
   const posterSize = posterSizes.find((size) => poster[size]) || PosterSize.large;
   return poster[posterSize];
 };
 
 class Card extends React.Component<CardProps> {
   render() {
-    const { manga } = this.props;
+    const {
+      manga: {
+        attributes: { posterImage, canonicalTitle, titles, description, synopsis, serialization },
+      },
+    } = this.props;
     return (
       <div className="card">
-        <div>
-          <div className="poster">
-            <img className="card-image" src={getPoster(manga.attributes.posterImage)} />
-          </div>
-          <h4>{getTitle(manga.attributes.titles)}</h4>
+        <div className="poster">
+          <img className="card-image" src={getPoster(posterImage)} />
         </div>
-        <div className="card-content"></div>
+        <div className="card-content">
+          <Title titles={titles} canonicalTitle={canonicalTitle} />
+          <section className="description">{synopsis || description}</section>
+          <h5 className="serialization">{serialization}</h5>
+        </div>
       </div>
     );
   }

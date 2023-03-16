@@ -2,7 +2,7 @@ import Card from 'components/Card';
 import Input from 'components/Input';
 import Page from 'components/Page';
 import React from 'react';
-import { mangaList } from './cardsMoch';
+import { mangaList } from './cardsMock';
 import './styles.css';
 
 type CardsProps = {
