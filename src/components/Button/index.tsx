@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 
 type ButtonProps = React.PropsWithChildren<{
-  onClick: () => void;
+  onClick?: () => void;
 }>;
 
 class Button extends React.Component<ButtonProps> {
