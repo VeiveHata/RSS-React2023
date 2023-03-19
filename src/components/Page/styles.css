@@ -1,0 +1,12 @@
+.page {
+  background-color: var(--background-color);
+  min-height: 100vh;
+  color: var(--main-color);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  align-items: center;
+}
