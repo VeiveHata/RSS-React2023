@@ -3,16 +3,19 @@ import './styles.css';
 
 type ButtonProps = React.PropsWithChildren<{
   onClick?: () => void;
+  id?: string;
 }>;
 
-class Button extends React.Component<ButtonProps> {
+export class Button extends React.Component<ButtonProps> {
   render() {
     return (
-      <button onClick={this.props.onClick} className="button">
+      <button
+        data-testid={this.props.id || 'button'}
+        onClick={this.props.onClick}
+        className="button"
+      >
         {this.props.children}
       </button>
     );
   }
 }
-
-export default Button;

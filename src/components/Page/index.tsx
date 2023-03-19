@@ -1,4 +1,4 @@
-import Header from 'components/Header';
+import { Header } from 'components/Header';
 import React from 'react';
 import './styles.css';
 
@@ -7,7 +7,7 @@ type PageProps = React.PropsWithChildren<{
   className: string;
 }>;
 
-class Page extends React.Component<PageProps> {
+export class Page extends React.Component<PageProps> {
   render() {
     const { className = '', name = 'page', children } = this.props;
     return (
@@ -18,5 +18,3 @@ class Page extends React.Component<PageProps> {
     );
   }
 }
-
-export default Page;

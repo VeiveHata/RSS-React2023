@@ -13,7 +13,7 @@ type TitleProps = {
   canonicalTitle: string;
 };
 
-class Title extends React.Component<TitleProps> {
+export class Title extends React.Component<TitleProps> {
   render() {
     const { titles, canonicalTitle } = this.props;
     const mainTitle = [
@@ -40,5 +40,3 @@ class Title extends React.Component<TitleProps> {
     );
   }
 }
-
-export default Title;

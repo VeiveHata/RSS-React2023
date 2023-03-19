@@ -8,7 +8,7 @@ type VolumeInfoProps = {
   volumeCount: number;
 };
 
-class VolumeInfo extends React.Component<VolumeInfoProps> {
+export class VolumeInfo extends React.Component<VolumeInfoProps> {
   render() {
     const { volumeCount, chapterCount } = this.props;
     return (
@@ -29,5 +29,3 @@ class VolumeInfo extends React.Component<VolumeInfoProps> {
     );
   }
 }
-
-export default VolumeInfo;

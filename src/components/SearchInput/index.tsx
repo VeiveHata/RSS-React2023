@@ -1,20 +1,20 @@
-import Button from 'components/Button';
+import { Button } from 'components/Button';
 import React, { ChangeEvent } from 'react';
 import { getValueFromLS, setValueToLS } from 'utils/localStorage';
 import './styles.css';
 
-type InputProps = {
+type SearchInputProps = {
   defaultValue?: string;
   onSearch: (value: string) => void;
   name?: string;
   withSave?: boolean;
 };
 
-type InputStateProps = {
+type SearchInputStateProps = {
   value: string;
 };
 
-class Input extends React.Component<InputProps, InputStateProps> {
+export class SearchInput extends React.Component<SearchInputProps, SearchInputStateProps> {
   state = {
     value: this.props.defaultValue || '',
   };
@@ -32,7 +32,7 @@ class Input extends React.Component<InputProps, InputStateProps> {
     }
   }
 
-  onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  onSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ value: event.target.value });
   };
 
@@ -47,13 +47,14 @@ class Input extends React.Component<InputProps, InputStateProps> {
           type="search"
           name={this.props.name}
           value={this.state.value}
-          onChange={this.onInputChange}
+          onChange={this.onSearchInputChange}
           className="input"
+          data-testid="searchInput"
         />
-        <Button onClick={this.onSearchClick}>Search</Button>
+        <Button id="serachButton" onClick={this.onSearchClick}>
+          Search
+        </Button>
       </div>
     );
   }
 }
-
-export default Input;

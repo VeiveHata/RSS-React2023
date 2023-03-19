@@ -1,31 +1,20 @@
 import { ConditionalRender } from 'components/ConditionalRender';
 import React from 'react';
-import { Manga, Poster, PosterSize } from 'types/manga';
-import StatusInfo from './StatusInfo';
+import { Manga } from 'types/manga';
+import { getPoster } from 'utils/card';
+import { StatusInfo } from './StatusInfo';
 import './styles.css';
-import Title from './Title';
-import VolumeInfo from './VolumeInfo';
+import { Title } from './Title';
+import { VolumeInfo } from './VolumeInfo';
 
 type CardProps = {
-  manga: Manga;
+  item: Manga;
 };
 
-const posterSizes: PosterSize[] = [
-  PosterSize.medium,
-  PosterSize.original,
-  PosterSize.small,
-  PosterSize.small_webp,
-];
-
-const getPoster = (poster: Poster) => {
-  const posterSize = posterSizes.find((size) => poster[size]) || PosterSize.large;
-  return poster[posterSize];
-};
-
-class Card extends React.Component<CardProps> {
+export class Card extends React.Component<CardProps> {
   render() {
     const {
-      manga: {
+      item: {
         attributes: {
           averageRating,
           status,
@@ -51,7 +40,9 @@ class Card extends React.Component<CardProps> {
           <section className="description">{synopsis || description}</section>
           <section className="card-footer">
             <ConditionalRender condition={Boolean(serialization)}>
-              <h5 className="serialization">{serialization}</h5>
+              <h5 data-testid="serialization" className="serialization">
+                {serialization}
+              </h5>
             </ConditionalRender>
             <VolumeInfo chapterCount={chapterCount} volumeCount={volumeCount} />
           </section>
@@ -60,5 +51,3 @@ class Card extends React.Component<CardProps> {
     );
   }
 }
-
-export default Card;

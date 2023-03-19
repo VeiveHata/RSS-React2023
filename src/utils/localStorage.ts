@@ -1,7 +1,13 @@
-export const setValueToLS = (key: string, value: string) => {
-  return localStorage.setItem(key, value);
+export const setValueToLS = (key: string, value: string | object | []) => {
+  return localStorage.setItem(key, typeof value === 'object' ? JSON.stringify(value) : value);
 };
 
 export const getValueFromLS = (key: string) => {
-  return localStorage.getItem(key) || '';
+  const value = localStorage.getItem(key);
+  if (!value) return '';
+  try {
+    return JSON.parse(value);
+  } catch {
+    return value;
+  }
 };
