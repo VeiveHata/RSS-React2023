@@ -5,9 +5,6 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   base: './',
-  build: {
-    outDir: './build',
-  },
   test: {
     globals: true,
     environment: 'jsdom',
