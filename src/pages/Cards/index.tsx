@@ -4,7 +4,6 @@ import { Page } from 'components/Page';
 import React from 'react';
 import { mangaList } from '../../../tests/mock.ts/cardsMock';
 import './styles.css';
-import { Link } from 'react-router-dom';
 
 class Cards extends React.Component {
   onSearch = (value: string) => {
@@ -13,10 +12,7 @@ class Cards extends React.Component {
 
   render() {
     return (
-      <Page className="cards" name="Cards">
-        <Link className="link" to="/about">
-          Link for testing input value: About page
-        </Link>
+      <Page className="cards" name="home">
         <SearchInput onSearch={this.onSearch} name="cardsSearch" withSave />
         <div className="cards-wrapper">
           {mangaList.map((manga) => (

@@ -137,3 +137,7 @@ table {
   font-size: 1.5rem;
   color: var(--decorate-color);
 }
+
+.ative-link {
+  color: var(--secondary-color)
+}
