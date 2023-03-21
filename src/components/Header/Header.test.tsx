@@ -1,5 +1,5 @@
 import React from 'react';
-import { getByText, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { Header } from '.';
 import { RouterData } from 'types/route';

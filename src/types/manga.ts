@@ -57,6 +57,8 @@ export type Titles = {
   [TitleLanguage.ja_jp]?: Nullable<string>;
 };
 
+export type MangaStatus = 'finished' | 'current' | 'tba';
+
 export interface Manga {
   id: string;
   type: string;
@@ -85,7 +87,7 @@ export interface Manga {
     ageRating: Nullable<string>;
     ageRatingGuide: Nullable<string>;
     subtype: string;
-    status: string;
+    status: Nullable<MangaStatus>;
     tba: Nullable<string>;
     posterImage: Poster;
     coverImage: Nullable<Poster>;
