@@ -28,7 +28,7 @@ class Forms extends React.Component<unknown, FormsState> {
     },
   };
 
-  onFormSubmit = (cardFormValue: FormSubmitValues) => {
+  onFormSubmit = (cardFormValue: FormSubmitValues, callback?: () => void) => {
     const newCards = [...this.state.cards, cardFormValue];
     this.setState({
       cards: newCards,
@@ -38,6 +38,7 @@ class Forms extends React.Component<unknown, FormsState> {
         visible: true,
       },
     });
+    callback && callback();
   };
 
   render() {

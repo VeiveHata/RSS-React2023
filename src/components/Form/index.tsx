@@ -1,7 +1,6 @@
 import { formFields, languageOptions, statusOptions } from 'consts/form';
 import React, { RefObject } from 'react';
 import { Checkbox } from './Checkbox';
-import { InputWithLabel } from './InputWithLabel';
 import { RadioButtons } from './RadioButtons';
 import { SelectInput } from './Select';
 import './styles.css';
@@ -12,10 +11,16 @@ import { FormField, FormSubmitValues } from 'types/form';
 import { DateInput } from './DateInput';
 
 type FormProps = {
-  onSubmit: (formValues: FormSubmitValues) => void;
+  onSubmit: (formValues: FormSubmitValues, callback?: () => void) => void;
 };
 export class Form extends React.Component<FormProps> {
   formRef: RefObject<HTMLFormElement> = React.createRef();
+
+  clearForm = () => {
+    const formElement = this.formRef.current;
+    if (!formElement) return;
+    formElement.reset();
+  };
 
   getBase64 = async (file: File | undefined) => {
     if (!file) return '';
@@ -56,21 +61,24 @@ export class Form extends React.Component<FormProps> {
     };
     const poster = await this.getBase64(formElements[formFields.poster]?.files?.[0]);
 
-    this.props.onSubmit({
-      posterImage: {
-        medium: poster as string,
-        meta: {
-          dimensions: {},
+    this.props.onSubmit(
+      {
+        posterImage: {
+          medium: poster as string,
+          meta: {
+            dimensions: {},
+          },
         },
+        titles: {
+          [responseBody.language]: responseBody.title,
+        },
+        canonicalTitle: responseBody.isCanonical ? responseBody.title : '',
+        startDate: responseBody.startDate,
+        status: responseBody.status || '',
+        description: responseBody.description,
       },
-      titles: {
-        [responseBody.language]: responseBody.title,
-      },
-      canonicalTitle: responseBody.isCanonical ? responseBody.title : '',
-      startDate: responseBody.startDate,
-      status: responseBody.status || '',
-      description: responseBody.description,
-    });
+      this.clearForm
+    );
   };
 
   render() {
