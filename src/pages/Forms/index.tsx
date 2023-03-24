@@ -33,7 +33,7 @@ class Forms extends React.Component<unknown, FormsState> {
     this.setState({
       cards: newCards,
       messageInfo: {
-        text: `New manga ${getTitle(cardFormValue.titles)} is added to the list`,
+        text: `New manga "${getTitle(cardFormValue.titles)}" is added to the list`,
         type: 'info',
         visible: true,
       },

@@ -1,17 +1,17 @@
 import React from 'react';
+import { InputProps } from 'types/form';
 import { InputWithLabel } from './InputWithLabel';
 import './styles.css';
 
-type UploadInputProps = {
+type UploadInputProps = InputProps & {
   title: string;
-  name: string;
 };
 
 export class UploadInput extends React.Component<UploadInputProps> {
   render() {
-    const { title, name } = this.props;
+    const { title, name, errors } = this.props;
     return (
-      <InputWithLabel title={title}>
+      <InputWithLabel title={title} errors={errors}>
         <input
           type="file"
           accept="image/png, image/gif, image/jpeg"

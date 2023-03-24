@@ -1,15 +1,5 @@
-import { FormField, SelectOption } from 'types/form';
+import { FormErrors, SelectOption } from 'types/form';
 import { MangaStatus, TitleLanguage } from 'types/manga';
-
-export const formFields: Record<FormField, FormField> = {
-  poster: 'poster',
-  title: 'title',
-  description: 'description',
-  titleLang: 'titleLang',
-  canonicalTitle: 'canonicalTitle',
-  startDate: 'startDate',
-  status: 'status',
-};
 
 export const languageOptions: SelectOption<TitleLanguage>[] = [
   { value: TitleLanguage.en, text: 'English' },
@@ -23,3 +13,13 @@ export const statusOptions: SelectOption<MangaStatus>[] = [
   { value: 'current', text: 'Ongoing' },
   { value: 'tba', text: 'To be announced' },
 ];
+
+export const emptyFormErrors: FormErrors = {
+  canonicalTitle: null,
+  description: null,
+  poster: null,
+  startDate: null,
+  status: null,
+  title: null,
+  titleLang: null,
+};

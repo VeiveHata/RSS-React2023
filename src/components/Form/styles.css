@@ -66,3 +66,9 @@
   resize: vertical;
   max-height: 20rem;
 }
+
+.input-error {
+  font-size: 0.5rem;
+  color: var(--error-color);
+  margin-top: 0.2rem;
+}

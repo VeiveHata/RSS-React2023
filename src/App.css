@@ -131,6 +131,7 @@ table {
   --secondary-color: #ffeb3b;
   --light-color: #f5f5f5;
   --decorate-color: #000000;
+  --error-color: rgb(255, 94, 0);
 }
 
 .link {
