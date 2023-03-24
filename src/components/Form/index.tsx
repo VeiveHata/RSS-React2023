@@ -5,10 +5,11 @@ import { InputWithLabel } from './InputWithLabel';
 import { RadioButtons } from './RadioButtons';
 import { SelectInput } from './Select';
 import './styles.css';
-import { TextInput } from './TextInput';
+import { TextAreaInput, TextInput } from './TextInput';
 import { UploadInput } from './UploadInput';
 import { Button } from 'components/Button';
 import { FormField, FormSubmitValues } from 'types/form';
+import { DateInput } from './DateInput';
 
 type FormProps = {
   onSubmit: (formValues: FormSubmitValues) => void;
@@ -84,11 +85,9 @@ export class Form extends React.Component<FormProps> {
           />
           <TextInput title="Title" name={formFields.title} />
           <Checkbox name={formFields.canonicalTitle} title="Set title as canonical" />
-          <TextInput title="Description" name={formFields.description} />
+          <TextAreaInput title="Description" name={formFields.description} />
         </fieldset>
-        <InputWithLabel title="Date of the first publishing">
-          <input className="form-input" type="date" name={formFields.startDate} />
-        </InputWithLabel>
+        <DateInput name={formFields.startDate} />
         <fieldset className="fieldset">
           <legend className="legend">Choose actual manga status:</legend>
           <RadioButtons options={statusOptions} name={formFields.status} />

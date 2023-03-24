@@ -17,3 +17,14 @@ export class TextInput extends React.Component<TextInputProps> {
     );
   }
 }
+
+export class TextAreaInput extends React.Component<TextInputProps> {
+  render() {
+    const { title, name } = this.props;
+    return (
+      <InputWithLabel title={title}>
+        <textarea rows={10} className="form-input textarea" name={name} />
+      </InputWithLabel>
+    );
+  }
+}

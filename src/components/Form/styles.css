@@ -61,3 +61,8 @@
   -webkit-appearance: none;
   -moz-appearance: none;
 }
+
+.textarea {
+  resize: vertical;
+  max-height: 20rem;
+}
