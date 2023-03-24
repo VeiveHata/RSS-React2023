@@ -15,9 +15,24 @@ class Cards extends React.Component {
       <Page className="cards" name="home">
         <SearchInput onSearch={this.onSearch} name="cardsSearch" withSave />
         <div className="cards-wrapper">
-          {mangaList.map((manga) => (
-            <Card item={manga} key={manga.id} />
-          ))}
+          {mangaList.map((manga) => {
+            const { attributes } = manga;
+            return (
+              <Card
+                averageRating={attributes.averageRating}
+                status={attributes.status || ''}
+                posterImage={attributes.posterImage}
+                canonicalTitle={attributes.canonicalTitle}
+                titles={attributes.titles}
+                description={attributes.description}
+                synopsis={attributes.synopsis}
+                serialization={attributes.serialization}
+                chapterCount={attributes.chapterCount}
+                volumeCount={attributes.volumeCount}
+                key={manga.id}
+              />
+            );
+          })}
         </div>
       </Page>
     );

@@ -59,43 +59,45 @@ export type Titles = {
 
 export type MangaStatus = 'finished' | 'current' | 'tba';
 
+export type MangaAttributes = {
+  createdAt: string;
+  updatedAt: string;
+  slug: string;
+  synopsis: string;
+  description: string;
+  coverImageTopOffset: number;
+  titles: Titles;
+  canonicalTitle: string;
+  abbreviatedTitles: string[];
+  averageRating: Nullable<string>;
+  ratingFrequencies: Record<string, string>;
+  userCount: number;
+  favoritesCount: number;
+  startDate: Nullable<string>;
+  endDate: Nullable<string>;
+  nextRelease: Nullable<string>;
+  popularityRank: number;
+  ratingRank: Nullable<number>;
+  ageRating: Nullable<string>;
+  ageRatingGuide: Nullable<string>;
+  subtype: string;
+  status: Nullable<MangaStatus>;
+  tba: Nullable<string>;
+  posterImage: Poster;
+  coverImage: Nullable<Poster>;
+  chapterCount: Nullable<number>;
+  volumeCount: number;
+  serialization: Nullable<string>;
+  mangaType: string;
+};
+
 export interface Manga {
   id: string;
   type: string;
   links: {
     self: string;
   };
-  attributes: {
-    createdAt: string;
-    updatedAt: string;
-    slug: string;
-    synopsis: string;
-    description: string;
-    coverImageTopOffset: number;
-    titles: Titles;
-    canonicalTitle: string;
-    abbreviatedTitles: string[];
-    averageRating: Nullable<string>;
-    ratingFrequencies: Record<string, string>;
-    userCount: number;
-    favoritesCount: number;
-    startDate: Nullable<string>;
-    endDate: Nullable<string>;
-    nextRelease: Nullable<string>;
-    popularityRank: number;
-    ratingRank: Nullable<number>;
-    ageRating: Nullable<string>;
-    ageRatingGuide: Nullable<string>;
-    subtype: string;
-    status: Nullable<MangaStatus>;
-    tba: Nullable<string>;
-    posterImage: Poster;
-    coverImage: Nullable<Poster>;
-    chapterCount: Nullable<number>;
-    volumeCount: number;
-    serialization: Nullable<string>;
-    mangaType: string;
-  };
+  attributes: MangaAttributes;
   relationships: {
     genres: {
       links: Links;

@@ -1,6 +1,7 @@
 import { ConditionalRender } from 'components/ConditionalRender';
 import React from 'react';
-import { Manga } from 'types/manga';
+import { Poster, Titles } from 'types/manga';
+import { Nullable } from 'types/utils';
 import { getPoster } from 'utils/card';
 import { StatusInfo } from './StatusInfo';
 import './styles.css';
@@ -8,26 +9,31 @@ import { Title } from './Title';
 import { VolumeInfo } from './VolumeInfo';
 
 type CardProps = {
-  item: Manga;
+  averageRating?: Nullable<string>;
+  status?: string;
+  posterImage: Poster;
+  canonicalTitle?: string;
+  titles: Titles;
+  description?: string;
+  synopsis?: string;
+  serialization?: Nullable<string>;
+  chapterCount?: Nullable<number>;
+  volumeCount?: Nullable<number>;
 };
 
 export class Card extends React.Component<CardProps> {
   render() {
     const {
-      item: {
-        attributes: {
-          averageRating,
-          status,
-          posterImage,
-          canonicalTitle,
-          titles,
-          description,
-          synopsis,
-          serialization,
-          chapterCount,
-          volumeCount,
-        },
-      },
+      averageRating = '',
+      status = '',
+      posterImage,
+      canonicalTitle = '',
+      titles,
+      description,
+      synopsis,
+      serialization,
+      chapterCount = null,
+      volumeCount = null,
     } = this.props;
     return (
       <div className="card">

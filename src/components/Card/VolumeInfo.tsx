@@ -5,7 +5,7 @@ import { Nullable } from 'types/utils';
 
 type VolumeInfoProps = {
   chapterCount: Nullable<number>;
-  volumeCount: number;
+  volumeCount: Nullable<number>;
 };
 
 export class VolumeInfo extends React.Component<VolumeInfoProps> {

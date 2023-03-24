@@ -1,10 +1,12 @@
 import React from 'react';
 import './styles.css';
 
-type ButtonProps = React.PropsWithChildren<{
-  onClick?: () => void;
-  id?: string;
-}>;
+type ButtonProps = React.PropsWithChildren<
+  React.HTMLProps<HTMLButtonElement> & {
+    onClick?: () => void;
+    id?: string;
+  }
+>;
 
 export class Button extends React.Component<ButtonProps> {
   render() {
