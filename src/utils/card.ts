@@ -1,4 +1,4 @@
-import { Poster, PosterSize } from 'types/manga';
+import { Poster, PosterSize, TitleLanguage, Titles } from 'types/manga';
 
 const posterSizes: PosterSize[] = [
   PosterSize.medium,
@@ -10,4 +10,10 @@ const posterSizes: PosterSize[] = [
 export const getPoster = (poster: Poster, sizes = posterSizes) => {
   const posterSize = sizes.find((size) => poster[size]) || PosterSize.large;
   return poster[posterSize];
+};
+
+const languages: TitleLanguage[] = [TitleLanguage.en, TitleLanguage.en_us];
+export const getTitle = (titles: Titles, lang?: TitleLanguage) => {
+  const titleLanguage = lang || languages.find((lang) => titles[lang]) || TitleLanguage.en;
+  return titles[titleLanguage];
 };

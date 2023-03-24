@@ -1,12 +1,7 @@
 import { ConditionalRender } from 'components/ConditionalRender';
 import React from 'react';
 import { TitleLanguage, Titles } from 'types/manga';
-
-const languages: TitleLanguage[] = [TitleLanguage.en, TitleLanguage.en_us];
-const getTitle = (titles: Titles, lang?: TitleLanguage) => {
-  const titleLanguage = lang || languages.find((lang) => titles[lang]) || TitleLanguage.en;
-  return titles[titleLanguage];
-};
+import { getTitle } from 'utils/card';
 
 type TitleProps = {
   titles: Titles;
