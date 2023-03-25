@@ -12,7 +12,7 @@ export class Header extends React.Component<HeaderProps> {
   render() {
     const { routes, name } = this.props;
     return (
-      <div className="header">
+      <div className="header" data-testid="header">
         <h2 data-testid="headerTitle">{routes[name].title}</h2>
         <div className="links">
           <Link
