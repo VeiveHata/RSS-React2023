@@ -2,7 +2,7 @@ import React from 'react';
 import { DialogMessageType } from 'types/messages';
 import './styles.css';
 
-type DialogMessageProps = {
+export type DialogMessageProps = {
   message?: string;
   messageType?: DialogMessageType;
   isVisisble?: boolean;
@@ -14,10 +14,11 @@ export class DialogMessage extends React.Component<DialogMessageProps> {
     const { message, messageType = 'info', isVisisble = false, onClose = () => {} } = this.props;
     return (
       <div
+        data-testid="dialogElement"
         className={`dialog-message ${messageType}-message ${isVisisble ? 'visible-message' : ''}`}
       >
         {message}
-        <button className="close-message" onClick={onClose}>
+        <button data-testid="dialogCloseButton" className="close-message" onClick={onClose}>
           X
         </button>
       </div>
