@@ -23,3 +23,19 @@ export const emptyFormErrors: FormErrors = {
   title: null,
   titleLang: null,
 };
+
+export const MIN_DESCRIPTION_LENGTH = 50;
+export const MIN_TITLE_LENGTH = 5;
+export const MOST_RECENT_MANGA_DAYS = 30;
+
+export const errorMessages = {
+  requiredField: 'This field is requiered',
+  requiredFile: 'Please upload a file',
+  requiredDate: 'Date should be specified',
+  minDescriptionLength: `The prescription is too short. Should be more than ${MIN_DESCRIPTION_LENGTH} symbols`,
+  minTtitleLength: `The title is too short. Should be more than ${MIN_TITLE_LENGTH} symbols`,
+  tbaWithDate: 'With selected date the status cannot be set',
+  currentWithTodayDate: 'The date cannot be less then today for Ongoing manga',
+  finishedWithEarlyDate:
+    'Manga cannot be finished less than for 30 days. Please check the date and status',
+};

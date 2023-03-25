@@ -68,7 +68,12 @@ export class Form extends React.Component<FormProps, FormState> {
 
   render() {
     return (
-      <form className="form" onSubmit={this.handleSubmit} ref={this.formRef}>
+      <form
+        className="form"
+        data-testid="mangaForm"
+        onSubmit={this.handleSubmit}
+        ref={this.formRef}
+      >
         <UploadInput
           name={FormField.poster}
           title="Add a poster"
