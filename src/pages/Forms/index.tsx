@@ -6,7 +6,7 @@ import { TitleH2 } from 'components/Title';
 import React from 'react';
 import { FormSubmitValues } from 'types/form';
 import { DialogMessageType } from 'types/messages';
-import { getTitle } from 'utils/card';
+import { getFirstExistTitle } from 'utils/card';
 import './styles.css';
 
 type FormsState = {
@@ -33,7 +33,7 @@ class Forms extends React.Component<unknown, FormsState> {
     this.setState({
       cards: newCards,
       messageInfo: {
-        text: `New manga "${getTitle(cardFormValue.titles)}" is added to the list`,
+        text: `New manga "${getFirstExistTitle(cardFormValue.titles)}" is added to the list`,
         type: 'info',
         visible: true,
       },

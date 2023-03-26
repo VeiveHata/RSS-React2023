@@ -17,3 +17,9 @@ export const getTitle = (titles: Titles, lang?: TitleLanguage) => {
   const titleLanguage = lang || languages.find((lang) => titles[lang]) || TitleLanguage.en;
   return titles[titleLanguage];
 };
+
+export const getFirstExistTitle = (titles: Titles) => {
+  const titleLanguage =
+    Object.values(TitleLanguage).find((lang) => titles[lang]) || TitleLanguage.en;
+  return titles[titleLanguage];
+};
