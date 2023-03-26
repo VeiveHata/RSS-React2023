@@ -4,7 +4,7 @@ import './styles.css';
 
 class NotFound extends React.Component {
   render() {
-    return <Page className="not-found" name="unknown" />;
+    return <Page className="not-found" name="unknown" testId="notFoundPage" />;
   }
 }
 

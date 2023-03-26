@@ -1,10 +1,9 @@
-import { Card } from 'components/Card';
 import { SearchInput } from 'components/SearchInput';
 import { Page } from 'components/Page';
 import React from 'react';
-import { mangaList } from '../../../tests/mock.ts/cardsMock';
+import { mangaList } from 'mock/cardsMock';
 import './styles.css';
-
+import { CardsList } from 'components/CardsList';
 class Cards extends React.Component {
   onSearch = (value: string) => {
     console.log(value);
@@ -12,28 +11,9 @@ class Cards extends React.Component {
 
   render() {
     return (
-      <Page className="cards" name="home">
+      <Page className="cards" name="home" testId="cardsPage">
         <SearchInput onSearch={this.onSearch} name="cardsSearch" withSave />
-        <div className="cards-wrapper">
-          {mangaList.map((manga) => {
-            const { attributes } = manga;
-            return (
-              <Card
-                averageRating={attributes.averageRating}
-                status={attributes.status || ''}
-                posterImage={attributes.posterImage}
-                canonicalTitle={attributes.canonicalTitle}
-                titles={attributes.titles}
-                description={attributes.description}
-                synopsis={attributes.synopsis}
-                serialization={attributes.serialization}
-                chapterCount={attributes.chapterCount}
-                volumeCount={attributes.volumeCount}
-                key={manga.id}
-              />
-            );
-          })}
-        </div>
+        <CardsList mangaList={mangaList} />
       </Page>
     );
   }

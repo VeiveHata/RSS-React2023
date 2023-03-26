@@ -1,6 +1,6 @@
 import { PosterSize } from 'types/manga';
 import { describe, it, expect } from 'vitest';
-import { mockCardItem } from '../../tests/mock.ts/cardsMock';
+import { mockCardItem } from 'mock/cardsMock';
 import { getPoster } from './card';
 
 describe('getPoster', () => {

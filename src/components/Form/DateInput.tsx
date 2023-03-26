@@ -10,7 +10,13 @@ export class DateInput extends React.Component<DateInputProps> {
     const { name, errors } = this.props;
     return (
       <InputWithLabel title="Date of the first publishing" errors={errors}>
-        <input className="form-input" type="date" max={new Date().toString()} name={name} />
+        <input
+          className="form-input"
+          type="date"
+          data-testid={name}
+          max={new Date().toString()}
+          name={name}
+        />
       </InputWithLabel>
     );
   }

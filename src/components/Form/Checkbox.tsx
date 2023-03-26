@@ -13,7 +13,7 @@ export class Checkbox extends React.Component<CheckboxProps> {
     return (
       <>
         <span>
-          <input type="checkbox" id={name} name={name} />
+          <input type="checkbox" id={name} name={name} data-testid={name} />
           <label htmlFor={name}>{title}</label>
         </span>
         <ConditionalRender condition={!!errors?.length}>

@@ -4,7 +4,7 @@ import './styles.css';
 
 class About extends React.Component {
   render() {
-    return <Page className="about" name="about"></Page>;
+    return <Page className="about" name="about" testId="aboutPage"></Page>;
   }
 }
 

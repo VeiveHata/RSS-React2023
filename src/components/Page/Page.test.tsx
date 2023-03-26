@@ -1,9 +1,7 @@
 import React from 'react';
-import { test, assert } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Page } from './index';
 import { RouterData } from 'types/route';
-import { Header } from 'components/Header';
 import { MemoryRouter } from 'react-router-dom';
 
 const router: RouterData = {

@@ -107,7 +107,9 @@ export class Form extends React.Component<FormProps, FormState> {
             errors={this.state.errors.status}
           />
         </fieldset>
-        <Button type="submit">Add to the library</Button>
+        <Button type="submit" id="formSubmitButton">
+          Add to the library
+        </Button>
       </form>
     );
   }

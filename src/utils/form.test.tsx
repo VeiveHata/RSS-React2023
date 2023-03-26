@@ -1,4 +1,4 @@
-import { FormField, FormObject } from 'types/form';
+import { FormField } from 'types/form';
 import { describe } from 'vitest';
 import {
   checkMinLengthValues,
@@ -10,16 +10,7 @@ import {
   validateForm,
 } from './form';
 import { errorMessages } from 'consts/form';
-
-const emptyForm: FormObject = {
-  title: '',
-  description: '',
-  poster: undefined,
-  canonicalTitle: false,
-  startDate: '',
-  titleLang: 'en',
-  status: '',
-};
+import { emptyForm, validFormValues } from 'mock/formMock';
 
 const todayDate = new Date().toString();
 const file = new File(['hello, world'], 'test.txt', { type: 'text/plain' });
@@ -65,7 +56,7 @@ describe('getRequiredMedia', () => {
   });
 
   it('return empty string for existing file', () => {
-    const blob = new File(['hello world'], 'hello.png', { type: 'image/png' });
+    const blob = file;
     const errorMessage = getRequiredMedia(blob);
     expect(errorMessage).not.toHaveLength;
   });
@@ -85,8 +76,7 @@ describe('checkMinLengthValues', () => {
       error
     )({
       ...emptyForm,
-      description:
-        'Quick brown fox jumps over the lazy dog.Quick brown fox jumps over the lazy dog.',
+      description: validFormValues.description,
     });
     expect(errorMessage).toBe('');
   });
@@ -148,16 +138,7 @@ describe('checkStatusWithSelectedDate', () => {
 
 describe('validateForm', () => {
   it('return no errors for correct form values', () => {
-    const formValues: FormObject = {
-      [FormField.canonicalTitle]: false,
-      [FormField.description]:
-        'Correct description with more than 50 symbols.Correct description with more than 50 symbols',
-      [FormField.poster]: file,
-      [FormField.startDate]: '',
-      [FormField.status]: 'tba',
-      [FormField.title]: 'Test title',
-      [FormField.titleLang]: 'en',
-    };
+    const formValues = validFormValues;
     const formErrors = {
       [FormField.canonicalTitle]: null,
       [FormField.description]: null,
@@ -171,16 +152,8 @@ describe('validateForm', () => {
     expect(errors).toStrictEqual(formErrors);
     expect(hasErrors).toBe(false);
   });
-  it('return no errors for required fields', () => {
-    const formValues: FormObject = {
-      [FormField.canonicalTitle]: false,
-      [FormField.description]: '',
-      [FormField.poster]: undefined,
-      [FormField.startDate]: '',
-      [FormField.status]: '',
-      [FormField.title]: '',
-      [FormField.titleLang]: 'en',
-    };
+  it('return errors for invalid form', () => {
+    const formValues = emptyForm;
     const formErrors = {
       [FormField.canonicalTitle]: null,
       [FormField.description]: [errorMessages.requiredField, errorMessages.minDescriptionLength],

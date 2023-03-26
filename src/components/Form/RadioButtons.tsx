@@ -15,7 +15,12 @@ export class RadioButtons extends React.Component<CheckboxProps> {
       <>
         {options.map((option) => (
           <span key={option.value} className="radio-input">
-            <input type="radio" id={option.value} name={name} />
+            <input
+              type="radio"
+              id={option.value}
+              name={name}
+              data-testid={`${name}-${option.value}`}
+            />
             <label htmlFor={option.value} className="radio-label">
               {option.text}
             </label>

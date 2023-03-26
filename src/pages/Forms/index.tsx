@@ -43,10 +43,10 @@ class Forms extends React.Component<unknown, FormsState> {
 
   render() {
     return (
-      <Page name="forms">
+      <Page name="forms" testId="formsPage">
         <TitleH2>Please add new manga to our library</TitleH2>
         <Form onSubmit={this.onFormSubmit} />
-        <div className="cards-wrapper">
+        <div className="cards-wrapper" data-testid="formsCardsList">
           {this.state.cards.map((card, index) => (
             <Card
               titles={card.titles}

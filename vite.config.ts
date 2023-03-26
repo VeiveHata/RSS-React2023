@@ -24,6 +24,7 @@ export default defineConfig({
       utils: path.resolve(__dirname, './src/utils'),
       types: path.resolve(__dirname, './src/types'),
       consts: path.resolve(__dirname, './src/consts'),
+      mock: path.resolve(__dirname, './src/mock'),
     },
   },
 });

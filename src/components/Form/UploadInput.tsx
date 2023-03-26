@@ -17,6 +17,7 @@ export class UploadInput extends React.Component<UploadInputProps> {
           accept="image/png, image/gif, image/jpeg"
           name={name}
           className="custom-file-input"
+          data-testid={name}
         />
       </InputWithLabel>
     );
