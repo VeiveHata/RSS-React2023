@@ -1,5 +1,5 @@
 import { emptyFormErrors, languageOptions, statusOptions } from 'consts/form';
-import React, { RefObject } from 'react';
+import React, { useRef, useState } from 'react';
 import { Checkbox } from './Checkbox';
 import { RadioButtons } from './RadioButtons';
 import { SelectInput } from './Select';
@@ -15,23 +15,19 @@ type FormProps = {
   onSubmit: (formValues: FormSubmitValues, callback?: () => void) => void;
 };
 
-type FormState = {
-  errors: FormErrors;
-};
-export class Form extends React.Component<FormProps, FormState> {
-  state: FormState = {
-    errors: { ...emptyFormErrors },
-  };
-  formRef: RefObject<HTMLFormElement> = React.createRef();
+export const Form: React.FC<FormProps> = ({ onSubmit }) => {
+  const [errors, setErrors] = useState<FormErrors>({ ...emptyFormErrors });
 
-  clearForm = () => {
-    this.formRef.current?.reset();
-    this.setState({ errors: { ...emptyFormErrors } });
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const clearForm = () => {
+    formRef.current?.reset();
+    setErrors({ ...emptyFormErrors });
   };
 
-  handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formElement = this.formRef.current;
+    const formElement = formRef.current;
     if (!formElement) return;
 
     const formElements = formElement.elements as unknown as FormElements;
@@ -43,9 +39,9 @@ export class Form extends React.Component<FormProps, FormState> {
     const { hasErrors, errors } = validateForm(formObject);
 
     if (hasErrors) {
-      this.setState({ errors });
+      setErrors(errors);
     } else {
-      this.props.onSubmit(
+      onSubmit(
         {
           posterImage: {
             medium: poster as string,
@@ -61,56 +57,41 @@ export class Form extends React.Component<FormProps, FormState> {
           status: formObject.status,
           description: formObject.description,
         },
-        this.clearForm
+        clearForm
       );
     }
   };
 
-  render() {
-    return (
-      <form
-        className="form"
-        data-testid="mangaForm"
-        onSubmit={this.handleSubmit}
-        ref={this.formRef}
-      >
-        <UploadInput
-          name={FormField.poster}
-          title="Add a poster"
-          errors={this.state.errors.poster}
+  return (
+    <form className="form" data-testid="mangaForm" onSubmit={handleSubmit} ref={formRef}>
+      <UploadInput name={FormField.poster} title="Add a poster" errors={errors.poster} />
+      <fieldset className="fieldset">
+        <SelectInput
+          title="Choose language of title"
+          name={FormField.titleLang}
+          options={languageOptions}
+          errors={errors.titleLang}
         />
-        <fieldset className="fieldset">
-          <SelectInput
-            title="Choose language of title"
-            name={FormField.titleLang}
-            options={languageOptions}
-            errors={this.state.errors.titleLang}
-          />
-          <TextInput title="Title" name={FormField.title} errors={this.state.errors.title} />
-          <Checkbox
-            name={FormField.canonicalTitle}
-            title="Set title as canonical"
-            errors={this.state.errors.canonicalTitle}
-          />
-          <TextAreaInput
-            title="Description"
-            name={FormField.description}
-            errors={this.state.errors.description}
-          />
-        </fieldset>
-        <DateInput name={FormField.startDate} errors={this.state.errors.startDate} />
-        <fieldset className="fieldset">
-          <legend className="legend">Choose actual manga status:</legend>
-          <RadioButtons
-            options={statusOptions}
-            name={FormField.status}
-            errors={this.state.errors.status}
-          />
-        </fieldset>
-        <Button type="submit" id="formSubmitButton">
-          Add to the library
-        </Button>
-      </form>
-    );
-  }
-}
+        <TextInput title="Title" name={FormField.title} errors={errors.title} />
+        <Checkbox
+          name={FormField.canonicalTitle}
+          title="Set title as canonical"
+          errors={errors.canonicalTitle}
+        />
+        <TextAreaInput
+          title="Description"
+          name={FormField.description}
+          errors={errors.description}
+        />
+      </fieldset>
+      <DateInput name={FormField.startDate} errors={errors.startDate} />
+      <fieldset className="fieldset">
+        <legend className="legend">Choose actual manga status:</legend>
+        <RadioButtons options={statusOptions} name={FormField.status} errors={errors.status} />
+      </fieldset>
+      <Button type="submit" id="formSubmitButton">
+        Add to the library
+      </Button>
+    </form>
+  );
+};

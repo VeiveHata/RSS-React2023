@@ -8,16 +8,10 @@ type ButtonProps = React.PropsWithChildren<
   }
 >;
 
-export class Button extends React.Component<ButtonProps> {
-  render() {
-    return (
-      <button
-        data-testid={this.props.id || 'button'}
-        onClick={this.props.onClick}
-        className="button"
-      >
-        {this.props.children}
-      </button>
-    );
-  }
-}
+export const Button: React.FC<ButtonProps> = ({ id, onClick, children }) => {
+  return (
+    <button data-testid={id || 'button'} onClick={onClick} className="button">
+      {children}
+    </button>
+  );
+};

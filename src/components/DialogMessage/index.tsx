@@ -9,19 +9,21 @@ export type DialogMessageProps = {
   onClose?: () => void;
 };
 
-export class DialogMessage extends React.Component<DialogMessageProps> {
-  render() {
-    const { message, messageType = 'info', isVisisble = false, onClose = () => {} } = this.props;
-    return (
-      <div
-        data-testid="dialogElement"
-        className={`dialog-message ${messageType}-message ${isVisisble ? 'visible-message' : ''}`}
-      >
-        {message}
-        <button data-testid="dialogCloseButton" className="close-message" onClick={onClose}>
-          X
-        </button>
-      </div>
-    );
-  }
-}
+export const DialogMessage: React.FC<DialogMessageProps> = ({
+  message,
+  messageType = 'info',
+  isVisisble = false,
+  onClose = () => {},
+}) => {
+  return (
+    <div
+      data-testid="dialogElement"
+      className={`dialog-message ${messageType}-message ${isVisisble ? 'visible-message' : ''}`}
+    >
+      {message}
+      <button data-testid="dialogCloseButton" className="close-message" onClick={onClose}>
+        X
+      </button>
+    </div>
+  );
+};

@@ -5,19 +5,16 @@ import './styles.css';
 
 type DateInputProps = InputProps;
 
-export class DateInput extends React.Component<DateInputProps> {
-  render() {
-    const { name, errors } = this.props;
-    return (
-      <InputWithLabel title="Date of the first publishing" errors={errors}>
-        <input
-          className="form-input"
-          type="date"
-          data-testid={name}
-          max={new Date().toString()}
-          name={name}
-        />
-      </InputWithLabel>
-    );
-  }
-}
+export const DateInput: React.FC<DateInputProps> = ({ name, errors }) => {
+  return (
+    <InputWithLabel title="Date of the first publishing" errors={errors}>
+      <input
+        className="form-input"
+        type="date"
+        data-testid={name}
+        max={new Date().toString()}
+        name={name}
+      />
+    </InputWithLabel>
+  );
+};

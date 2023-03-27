@@ -7,19 +7,16 @@ type UploadInputProps = InputProps & {
   title: string;
 };
 
-export class UploadInput extends React.Component<UploadInputProps> {
-  render() {
-    const { title, name, errors } = this.props;
-    return (
-      <InputWithLabel title={title} errors={errors}>
-        <input
-          type="file"
-          accept="image/png, image/gif, image/jpeg"
-          name={name}
-          className="custom-file-input"
-          data-testid={name}
-        />
-      </InputWithLabel>
-    );
-  }
-}
+export const UploadInput: React.FC<UploadInputProps> = ({ title, name, errors }) => {
+  return (
+    <InputWithLabel title={title} errors={errors}>
+      <input
+        type="file"
+        accept="image/png, image/gif, image/jpeg"
+        name={name}
+        className="custom-file-input"
+        data-testid={name}
+      />
+    </InputWithLabel>
+  );
+};

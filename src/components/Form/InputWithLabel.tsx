@@ -8,17 +8,14 @@ type InputWithLabelProps = PropsWithChildren<{
   errors?: Nullable<string[]>;
 }>;
 
-export class InputWithLabel extends React.Component<InputWithLabelProps> {
-  render() {
-    const { title, children, errors } = this.props;
-    return (
-      <label className="formInput">
-        <p className="label">{title}:</p>
-        {children}
-        <ConditionalRender condition={!!errors?.length}>
-          <p className="input-error">{errors?.[0]}</p>
-        </ConditionalRender>
-      </label>
-    );
-  }
-}
+export const InputWithLabel: React.FC<InputWithLabelProps> = ({ title, children, errors }) => {
+  return (
+    <label className="formInput">
+      <p className="label">{title}:</p>
+      {children}
+      <ConditionalRender condition={!!errors?.length}>
+        <p className="input-error">{errors?.[0]}</p>
+      </ConditionalRender>
+    </label>
+  );
+};

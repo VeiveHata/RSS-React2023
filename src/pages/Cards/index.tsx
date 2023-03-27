@@ -4,19 +4,18 @@ import React from 'react';
 import { mangaList } from 'mock/cardsMock';
 import './styles.css';
 import { CardsList } from 'components/CardsList';
-class Cards extends React.Component {
-  onSearch = (value: string) => {
+
+const Cards: React.FC = () => {
+  const onSearch = (value: string) => {
     console.log(value);
   };
 
-  render() {
-    return (
-      <Page className="cards" name="home" testId="cardsPage">
-        <SearchInput onSearch={this.onSearch} name="cardsSearch" withSave />
-        <CardsList mangaList={mangaList} />
-      </Page>
-    );
-  }
-}
+  return (
+    <Page className="cards" name="home" testId="cardsPage">
+      <SearchInput onSearch={onSearch} name="cardsSearch" withSave />
+      <CardsList mangaList={mangaList} />
+    </Page>
+  );
+};
 
 export default Cards;

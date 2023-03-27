@@ -11,20 +11,17 @@ type PageProps = React.PropsWithChildren<{
   testId?: string;
 }>;
 
-export class Page extends React.Component<PageProps> {
-  render() {
-    const {
-      className = '',
-      name = 'home',
-      children,
-      router = routes,
-      testId = 'pageContainer',
-    } = this.props;
-    return (
-      <div data-testid={testId} className={`${className} page`}>
-        <Header routes={router} name={name} />
-        <div className="content">{children}</div>
-      </div>
-    );
-  }
-}
+export const Page: React.FC<PageProps> = ({
+  name = 'home',
+  className = '',
+  router = routes,
+  testId = 'pageContainer',
+  children,
+}) => {
+  return (
+    <div data-testid={testId} className={`${className} page`}>
+      <Header routes={router} name={name} />
+      <div className="content">{children}</div>
+    </div>
+  );
+};
