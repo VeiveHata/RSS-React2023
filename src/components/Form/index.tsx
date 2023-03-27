@@ -1,5 +1,5 @@
-import { emptyFormErrors, languageOptions, statusOptions } from 'consts/form';
-import React, { useRef, useState } from 'react';
+import { languageOptions, statusOptions } from 'consts/form';
+import React, { useRef, BaseSyntheticEvent } from 'react';
 import { Checkbox } from './Checkbox';
 import { RadioButtons } from './RadioButtons';
 import { SelectInput } from './Select';
@@ -7,87 +7,97 @@ import './styles.css';
 import { TextAreaInput, TextInput } from './TextInput';
 import { UploadInput } from './UploadInput';
 import { Button } from 'components/Button';
-import { FormElements, FormErrors, FormField, FormSubmitValues } from 'types/form';
+import { FormField, FormValues, FormSubmitValues } from 'types/form';
 import { DateInput } from './DateInput';
-import { getBase64, getFormValuesAsObject, validateForm } from 'utils/form';
+import { getBase64 } from 'utils/form';
+import { useForm, FieldValues } from 'react-hook-form';
 
 type FormProps = {
   onSubmit: (formValues: FormSubmitValues, callback?: () => void) => void;
 };
 
 export const Form: React.FC<FormProps> = ({ onSubmit }) => {
-  const [errors, setErrors] = useState<FormErrors>({ ...emptyFormErrors });
-
   const formRef = useRef<HTMLFormElement>(null);
 
-  const clearForm = () => {
-    formRef.current?.reset();
-    setErrors({ ...emptyFormErrors });
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({ mode: 'onSubmit', reValidateMode: 'onSubmit' });
 
-  const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formElement = formRef.current;
-    if (!formElement) return;
-
-    const formElements = formElement.elements as unknown as FormElements;
-
-    const formObject = getFormValuesAsObject(formElements);
-
-    const poster = await getBase64(formObject.poster);
-
-    const { hasErrors, errors } = validateForm(formObject);
-
-    if (hasErrors) {
-      setErrors(errors);
-    } else {
-      onSubmit(
-        {
-          posterImage: {
-            medium: poster as string,
-            meta: {
-              dimensions: {},
-            },
+  const submit = async (
+    formData: FieldValues,
+    e?: BaseSyntheticEvent<object, unknown, HTMLFormElement>
+  ) => {
+    const poster = await getBase64(formData.poster[0]);
+    onSubmit(
+      {
+        posterImage: {
+          medium: poster as string,
+          meta: {
+            dimensions: {},
           },
-          titles: {
-            [formObject.titleLang]: formObject.title,
-          },
-          canonicalTitle: formObject.canonicalTitle ? formObject.title : '',
-          startDate: formObject.startDate,
-          status: formObject.status,
-          description: formObject.description,
         },
-        clearForm
-      );
-    }
+        titles: {
+          [formData.titleLang]: formData.title,
+        },
+        canonicalTitle: formData.canonicalTitle ? formData.title : '',
+        startDate: formData.startDate,
+        status: formData.status,
+        description: formData.description,
+      },
+      () => e?.target.reset()
+    );
   };
 
   return (
-    <form className="form" data-testid="mangaForm" onSubmit={handleSubmit} ref={formRef}>
-      <UploadInput name={FormField.poster} title="Add a poster" errors={errors.poster} />
+    <form className="form" data-testid="mangaForm" onSubmit={handleSubmit(submit)} ref={formRef}>
+      <UploadInput
+        name={FormField.poster}
+        title="Add a poster"
+        errors={errors[FormField.poster]}
+        register={register}
+      />
       <fieldset className="fieldset">
         <SelectInput
           title="Choose language of title"
           name={FormField.titleLang}
           options={languageOptions}
-          errors={errors.titleLang}
+          errors={errors[FormField.titleLang]}
+          register={register}
         />
-        <TextInput title="Title" name={FormField.title} errors={errors.title} />
+        <TextInput
+          title="Title"
+          register={register}
+          name={FormField.title}
+          errors={errors[FormField.title]}
+        />
         <Checkbox
           name={FormField.canonicalTitle}
           title="Set title as canonical"
-          errors={errors.canonicalTitle}
+          errors={errors[FormField.canonicalTitle]}
+          register={register}
         />
         <TextAreaInput
           title="Description"
           name={FormField.description}
-          errors={errors.description}
+          errors={errors[FormField.description]}
+          register={register}
         />
       </fieldset>
-      <DateInput name={FormField.startDate} errors={errors.startDate} />
+      <DateInput
+        name={FormField.startDate}
+        errors={errors[FormField.startDate]}
+        register={register}
+      />
       <fieldset className="fieldset">
         <legend className="legend">Choose actual manga status:</legend>
-        <RadioButtons options={statusOptions} name={FormField.status} errors={errors.status} />
+        <RadioButtons
+          options={statusOptions}
+          name={FormField.status}
+          errors={errors[FormField.status]}
+          register={register}
+        />
       </fieldset>
       <Button type="submit" id="formSubmitButton">
         Add to the library

@@ -1,11 +1,10 @@
 import {
-  emptyFormErrors,
   errorMessages,
   MIN_DESCRIPTION_LENGTH,
   MIN_TITLE_LENGTH,
   MOST_RECENT_MANGA_DAYS,
 } from 'consts/form';
-import { FormElements, FormField, FormObject } from 'types/form';
+import { FormErrors, FormErrorsTypes, FormField, FormValues, InputValue } from 'types/form';
 
 export const getBase64 = async (file: File | undefined) => {
   if (!file) return '';
@@ -17,120 +16,83 @@ export const getBase64 = async (file: File | undefined) => {
   });
 };
 
-export const getRadioButtonsValue = (formRadioValues: HTMLInputElement[]) => {
-  return Array.from(formRadioValues).find((input) => input.checked)?.id;
+export const requiredFieldValidation = (inputValue: string | boolean) => !!inputValue;
+
+export const requiredMediaValidation = (inputValue: File | undefined) => !!inputValue?.length;
+
+export const checkRequiredInput = (value: InputValue) => {
+  const isStringOrBoolean = typeof value === 'string' || typeof value === 'boolean';
+  return isStringOrBoolean ? requiredFieldValidation(value) : requiredMediaValidation(value);
 };
 
-export const getFormValuesAsObject = (formElements: FormElements): FormObject => {
-  const checkSelectedRadio = (fieldName: FormField) => formElements[fieldName]?.value === 'on';
-  const checkSelectedFlag = (fieldName: FormField) => formElements[fieldName]?.checked;
-  const getFormValue = (fieldName: FormField) => formElements[fieldName]?.value || '';
-
-  return {
-    [FormField.canonicalTitle]: checkSelectedFlag(FormField.canonicalTitle),
-    [FormField.description]: getFormValue(FormField.description),
-    [FormField.poster]: formElements[FormField.poster]?.files?.[0],
-    [FormField.startDate]: getFormValue(FormField.startDate),
-    [FormField.status]: checkSelectedRadio(FormField.status)
-      ? getRadioButtonsValue(formElements[FormField.status] as unknown as HTMLInputElement[]) || ''
-      : '',
-    [FormField.title]: getFormValue(FormField.title),
-    [FormField.titleLang]: getFormValue(FormField.titleLang),
-  };
+export const checkMinLengthValues = (min: number) => {
+  return (value: InputValue) => typeof value === 'string' && value.trim().length >= min;
 };
 
-export const getEmptyValueError = (inputValue: string | boolean) =>
-  !inputValue ? errorMessages.requiredField : '';
+export const currentStatusDate = (_: InputValue, formValues: FormValues) => {
+  const selectedDate = formValues[FormField.startDate];
+  const selectedStatus = formValues[FormField.status];
+  const todayDate = new Date().toDateString();
+  if (selectedStatus !== 'current') return true;
 
-export const getRequiredMedia = (inputValue: File | undefined) =>
-  !inputValue ? errorMessages.requiredFile : '';
-
-export const checkRequiredInput = (key: FormField) => {
-  return (formValues: FormObject) => {
-    const value = formValues[key];
-    const isStringOrBoolean = typeof value === 'string' || typeof value === 'boolean';
-    return isStringOrBoolean ? getEmptyValueError(value) : getRequiredMedia(value);
-  };
+  return Boolean(
+    selectedStatus === 'current' && new Date(selectedDate).getTime() < new Date(todayDate).getTime()
+  );
 };
 
-export const checkMinLengthValues = (key: FormField, min: number, error: string) => {
-  return (formValues: FormObject) => {
-    const value = formValues[key];
-    if (typeof value === 'string') {
-      return value.trim().length <= min ? error : '';
-    }
-    return '';
-  };
-};
-
-export const checkStatusWithSelectedDate = (formValues: FormObject) => {
+export const tbaStatusDate = (_: InputValue, formValues: FormValues) => {
   const selectedDate = formValues[FormField.startDate];
   const selectedStatus = formValues[FormField.status];
 
-  if (selectedStatus === 'tba' && !!selectedDate) {
-    return errorMessages.tbaWithDate;
-  }
+  return selectedStatus !== 'tba' || !selectedDate;
+};
 
-  const todayDate = new Date().toDateString();
-  if (
-    selectedStatus === 'current' &&
-    new Date(selectedDate).getTime() >= new Date(todayDate).getTime()
-  ) {
-    return errorMessages.currentWithTodayDate;
-  }
+export const finishedStatusDate = (_: InputValue, formValues: FormValues) => {
+  const selectedDate = formValues[FormField.startDate];
+  const selectedStatus = formValues[FormField.status];
+
+  if (selectedStatus !== 'finished') return true;
 
   const mostRecentDate = new Date();
   mostRecentDate.setDate(mostRecentDate.getDate() - MOST_RECENT_MANGA_DAYS);
   const isSelectedDateOlder = new Date(selectedDate).getTime() < mostRecentDate.getTime();
-  if (selectedStatus === 'finished' && !!selectedDate && !isSelectedDateOlder) {
-    return errorMessages.finishedWithEarlyDate;
-  }
-
-  return '';
+  return Boolean(!!selectedDate && isSelectedDateOlder);
 };
 
-export const checkRequiredDate = (formValues: FormObject) => {
+export const checkRequiredDate = (_: InputValue, formValues: FormValues) => {
   const selectedDate = formValues[FormField.startDate];
   const selectedStatus = formValues[FormField.status];
 
-  if (selectedStatus !== 'tba' && !selectedDate) {
-    return errorMessages.requiredDate;
-  }
-  return '';
+  return selectedStatus === 'tba' || !!selectedDate;
 };
 
-const formValidationSchema: Record<FormField, ((formValues: FormObject) => string)[]> = {
-  [FormField.canonicalTitle]: [],
-  [FormField.description]: [
-    checkRequiredInput(FormField.description),
-    checkMinLengthValues(
-      FormField.description,
-      MIN_DESCRIPTION_LENGTH,
-      errorMessages.minDescriptionLength
-    ),
-  ],
-  [FormField.poster]: [checkRequiredInput(FormField.poster)],
-  [FormField.startDate]: [checkRequiredDate, checkStatusWithSelectedDate],
-  [FormField.status]: [checkRequiredInput(FormField.status), checkStatusWithSelectedDate],
-  [FormField.title]: [
-    checkRequiredInput(FormField.title),
-    checkMinLengthValues(FormField.description, MIN_TITLE_LENGTH, errorMessages.minTtitleLength),
-  ],
-  [FormField.titleLang]: [checkRequiredInput(FormField.titleLang)],
+export const formValidationSchema: Record<FormField, FormErrors> = {
+  [FormField.canonicalTitle]: {},
+  [FormField.description]: {
+    requiredField: checkRequiredInput,
+    minDescriptionLength: checkMinLengthValues(MIN_DESCRIPTION_LENGTH),
+  },
+  [FormField.poster]: { requiredFile: checkRequiredInput },
+  [FormField.startDate]: {},
+  [FormField.startDate]: {
+    requiredDate: checkRequiredDate,
+    tbaWithDate: tbaStatusDate,
+    currentWithTodayDate: currentStatusDate,
+    finishedWithEarlyDate: finishedStatusDate,
+  },
+  [FormField.status]: {
+    requiredField: checkRequiredInput,
+    tbaWithDate: tbaStatusDate,
+    currentWithTodayDate: currentStatusDate,
+    finishedWithEarlyDate: finishedStatusDate,
+  },
+  [FormField.title]: {
+    requiredField: checkRequiredInput,
+    minTtitleLength: checkMinLengthValues(MIN_TITLE_LENGTH),
+  },
+  [FormField.titleLang]: { requiredField: checkRequiredInput },
 };
 
-export const validateForm = (formValues: FormObject) => {
-  const errors = { ...emptyFormErrors };
-  let withErrors = false;
-
-  (Object.keys(formValues) as FormField[]).forEach((key) => {
-    const fieldErrors = formValidationSchema[key]
-      .map((validationAction) => validationAction(formValues))
-      .filter(Boolean);
-    const fieldHasError = !!fieldErrors.length;
-    errors[key] = fieldHasError ? fieldErrors : null;
-    withErrors = withErrors || fieldHasError;
-  });
-
-  return { errors, hasErrors: withErrors };
+export const getErrorMessage = (type: FormErrorsTypes) => {
+  return errorMessages[type];
 };

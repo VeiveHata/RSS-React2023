@@ -1,20 +1,22 @@
 import { ConditionalRender } from 'components/ConditionalRender';
 import React, { PropsWithChildren } from 'react';
-import { Nullable } from 'types/utils';
 import './styles.css';
+import { FormErrorsTypes, InputProps } from 'types/form';
+import { getErrorMessage } from 'utils/form';
 
-type InputWithLabelProps = PropsWithChildren<{
-  title: string;
-  errors?: Nullable<string[]>;
-}>;
+type InputWithLabelProps = PropsWithChildren<
+  Omit<InputProps, 'register' | 'name'> & {
+    title: string;
+  }
+>;
 
 export const InputWithLabel: React.FC<InputWithLabelProps> = ({ title, children, errors }) => {
   return (
     <label className="formInput">
       <p className="label">{title}:</p>
       {children}
-      <ConditionalRender condition={!!errors?.length}>
-        <p className="input-error">{errors?.[0]}</p>
+      <ConditionalRender condition={!!errors}>
+        <p className="input-error">{getErrorMessage(errors?.type as FormErrorsTypes)}</p>
       </ConditionalRender>
     </label>
   );
