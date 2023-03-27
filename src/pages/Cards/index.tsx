@@ -1,9 +1,10 @@
 import { SearchInput } from 'components/SearchInput';
-import { Page } from 'components/Page';
 import React from 'react';
 import { mangaList } from 'mock/cardsMock';
 import './styles.css';
 import { CardsList } from 'components/CardsList';
+import { PageContent } from 'components/PageContent';
+import { pagesData } from 'consts/router';
 
 const Cards: React.FC = () => {
   const onSearch = (value: string) => {
@@ -11,10 +12,10 @@ const Cards: React.FC = () => {
   };
 
   return (
-    <Page className="cards" name="home" testId="cardsPage">
+    <PageContent testId={pagesData.library.testId}>
       <SearchInput onSearch={onSearch} name="cardsSearch" withSave />
       <CardsList mangaList={mangaList} />
-    </Page>
+    </PageContent>
   );
 };
 

@@ -1,18 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
 import Cards from './index';
+import { pagesData } from 'consts/router';
 
 describe('Cards page', () => {
   it('renders Cards page', () => {
-    const { getByTestId } = render(
-      <MemoryRouter>
-        <Cards />
-      </MemoryRouter>
-    );
-    const pageComponent = getByTestId('cardsPage');
+    const { getByTestId } = render(<Cards />);
+    const pageComponent = getByTestId(pagesData.library.testId);
     expect(pageComponent).toBeInTheDocument();
-    expect(pageComponent).toHaveClass('cards');
   });
 });

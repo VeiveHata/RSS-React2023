@@ -1,9 +1,10 @@
-export type Pages = 'home' | 'about' | 'forms' | 'unknown';
+export type Pages = 'library' | 'about' | 'forms' | 'unknown';
 
-type RouteInfo = {
+export type PageInfo = {
   name: Pages;
   path: string;
   title: string;
+  testId: string;
 };
 
-export type RouterData = Record<Pages, RouteInfo>;
+export type PagesData = Record<Pages, PageInfo>;

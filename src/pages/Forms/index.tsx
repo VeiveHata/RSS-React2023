@@ -1,8 +1,9 @@
 import { Card } from 'components/Card';
 import { DialogMessage } from 'components/DialogMessage';
 import { Form } from 'components/Form';
-import { Page } from 'components/Page';
+import { PageContent } from 'components/PageContent';
 import { TitleH2 } from 'components/Title';
+import { pagesData } from 'consts/router';
 import React, { useState } from 'react';
 import { FormSubmitValues } from 'types/form';
 import { DialogMessageType } from 'types/messages';
@@ -33,7 +34,7 @@ const Forms: React.FC = () => {
   };
 
   return (
-    <Page name="forms" testId="formsPage">
+    <PageContent testId={pagesData.forms.testId}>
       <TitleH2>Please add new manga to our library</TitleH2>
       <Form onSubmit={onFormSubmit} />
       <div className="cards-wrapper" data-testid="formsCardsList">
@@ -60,7 +61,7 @@ const Forms: React.FC = () => {
           })
         }
       />
-    </Page>
+    </PageContent>
   );
 };
 
