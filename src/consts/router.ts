@@ -1,25 +1,35 @@
-import { RouterData } from 'types/route';
+import { Pages, PagesData } from 'types/route';
 
-// TODO: remove after correct Hook Router implementation
-export const routes: RouterData = {
-  home: {
-    name: 'home',
-    path: '/',
-    title: 'Home',
+export const routesPath: Record<Pages, string> = {
+  library: '/library',
+  about: '/about',
+  forms: '/forms',
+  unknown: '*',
+};
+
+export const pagesData: PagesData = {
+  library: {
+    name: 'library',
+    path: routesPath.library,
+    title: 'Library',
+    testId: 'libraryPage',
   },
   about: {
     name: 'about',
-    path: '/about',
+    path: routesPath.about,
     title: 'About Us',
+    testId: 'aboutPage',
   },
   forms: {
     name: 'forms',
-    path: '/forms',
+    path: routesPath.forms,
     title: 'Forms',
+    testId: 'formsPage',
   },
   unknown: {
     name: 'unknown',
-    path: '*',
+    path: routesPath.unknown,
     title: 'Not Found',
+    testId: 'notFoundPage',
   },
 };

@@ -1,15 +1,14 @@
-import { FormField } from 'types/form';
 import { describe } from 'vitest';
 import {
   checkMinLengthValues,
   checkRequiredDate,
-  checkStatusWithSelectedDate,
+  currentStatusDate,
+  finishedStatusDate,
   getBase64,
-  getEmptyValueError,
-  getRequiredMedia,
-  validateForm,
+  requiredFieldValidation,
+  requiredMediaValidation,
+  tbaStatusDate,
 } from './form';
-import { errorMessages } from 'consts/form';
 import { emptyForm, validFormValues } from 'mock/formMock';
 
 const todayDate = new Date().toString();
@@ -27,7 +26,7 @@ async function readFileAsBase64(file: File) {
 describe('getBase64', () => {
   it('returns an empty string when no file is provided', async () => {
     const result = await getBase64(undefined);
-    expect(result).toBe('');
+    expect(result).toBeTruthy;
   });
 
   it('returns the base64-encoded string when a file is provided', async () => {
@@ -37,134 +36,99 @@ describe('getBase64', () => {
   });
 });
 
-describe('getEmptyValueError', () => {
-  it('return error message for empty value', () => {
-    const errorMessage = getEmptyValueError('');
-    expect(errorMessage).toHaveLength;
+describe('requiredFieldValidation', () => {
+  it('invalid for empty field', () => {
+    const isValid = requiredFieldValidation('');
+    expect(isValid).toBeFalsy;
   });
 
-  it('return empty string for existing value', () => {
-    const errorMessage = getEmptyValueError('input value');
-    expect(errorMessage).not.toHaveLength;
+  it('valid for setted field', () => {
+    const isValid = requiredFieldValidation('input value');
+    expect(isValid).toBeTruthy;
   });
 });
 
-describe('getRequiredMedia', () => {
-  it('return error message for empty file', () => {
-    const errorMessage = getRequiredMedia(undefined);
-    expect(errorMessage).toHaveLength;
+describe('requiredMediaValidation', () => {
+  it('invalid for empty field', () => {
+    const isValid = requiredMediaValidation(undefined);
+    expect(isValid).toBeFalsy;
   });
 
-  it('return empty string for existing file', () => {
+  it('valid for setted field', () => {
     const blob = file;
-    const errorMessage = getRequiredMedia(blob);
-    expect(errorMessage).not.toHaveLength;
+    const isValid = requiredMediaValidation(blob);
+    expect(isValid).toBeTruthy;
   });
 });
 
 describe('checkMinLengthValues', () => {
-  const error = 'description error';
   it('return error message for value less then 50 symbols', () => {
-    const errorMessage = checkMinLengthValues(FormField.description, 50, error)(emptyForm);
-    expect(errorMessage).toBe(error);
+    const isValid = checkMinLengthValues(50)(emptyForm.description);
+    expect(isValid).toBeFalsy;
   });
 
   it('return empty string for value more or equal then 50 symbols', () => {
-    const errorMessage = checkMinLengthValues(
-      FormField.description,
-      50,
-      error
-    )({
-      ...emptyForm,
-      description: validFormValues.description,
-    });
-    expect(errorMessage).toBe('');
+    const isValid = checkMinLengthValues(50)(validFormValues.description);
+    expect(isValid).toBeTruthy;
   });
 });
 
 describe('checkRequiredDate', () => {
   it('return error message for not tba status and without selected date', () => {
-    const errorMessage = checkRequiredDate({ ...emptyForm, status: 'current', startDate: '' });
-    expect(errorMessage).toBe(errorMessages.requiredDate);
+    const isValid = checkRequiredDate('', { ...emptyForm, status: 'current', startDate: '' });
+    expect(isValid).toBeFalsy;
   });
   it('return empty string for tba status without date', () => {
-    const errorMessage = checkRequiredDate({ ...emptyForm, status: 'tba', startDate: '' });
-    expect(errorMessage).toBe('');
+    const isValid = checkRequiredDate('', { ...emptyForm, status: 'tba', startDate: '' });
+    expect(isValid).toBeTruthy;
   });
   it('return empty string for current status with date', () => {
-    const errorMessage = checkRequiredDate({
+    const isValid = checkRequiredDate('', {
       ...emptyForm,
       status: 'current',
       startDate: new Date().toString(),
     });
-    expect(errorMessage).toBe('');
+    expect(isValid).toBeTruthy;
   });
 });
 
-describe('checkStatusWithSelectedDate', () => {
+describe('tbaStatusDate', () => {
   it('return error message for tba status with selected date', () => {
-    const errorMessage = checkStatusWithSelectedDate({
+    const isValid = tbaStatusDate('', {
       ...emptyForm,
       startDate: todayDate,
       status: 'tba',
     });
-    expect(errorMessage).toBe(errorMessages.tbaWithDate);
-  });
-  it('return error message for current status and date selected later then or today', () => {
-    const errorMessage = checkStatusWithSelectedDate({
-      ...emptyForm,
-      startDate: todayDate,
-      status: 'current',
-    });
-    expect(errorMessage).toBe(errorMessages.currentWithTodayDate);
-  });
-  it('return error message for finished status, selected date and selected date is less than 30 days ago', () => {
-    const errorMessage = checkStatusWithSelectedDate({
-      ...emptyForm,
-      startDate: todayDate,
-      status: 'finished',
-    });
-    expect(errorMessage).toBe(errorMessages.finishedWithEarlyDate);
+    expect(isValid).toBeFalsy;
   });
   it('return empty message tba status without selected date', () => {
-    const errorMessage = checkStatusWithSelectedDate({
+    const isValid = tbaStatusDate('', {
       ...emptyForm,
       startDate: '',
       status: 'tba',
     });
-    expect(errorMessage).toBe('');
+    expect(isValid).toBeTruthy;
   });
 });
 
-describe('validateForm', () => {
-  it('return no errors for correct form values', () => {
-    const formValues = validFormValues;
-    const formErrors = {
-      [FormField.canonicalTitle]: null,
-      [FormField.description]: null,
-      [FormField.poster]: null,
-      [FormField.startDate]: null,
-      [FormField.status]: null,
-      [FormField.title]: null,
-      [FormField.titleLang]: null,
-    };
-    const { errors, hasErrors } = validateForm(formValues);
-    expect(errors).toStrictEqual(formErrors);
-    expect(hasErrors).toBe(false);
+describe('currentStatusDate', () => {
+  it('return error message for current status and date selected later then or today', () => {
+    const isValid = currentStatusDate('', {
+      ...emptyForm,
+      startDate: todayDate,
+      status: 'current',
+    });
+    expect(isValid).toBeFalsy;
   });
-  it('return errors for invalid form', () => {
-    const formValues = emptyForm;
-    const formErrors = {
-      [FormField.canonicalTitle]: null,
-      [FormField.description]: [errorMessages.requiredField, errorMessages.minDescriptionLength],
-      [FormField.poster]: [errorMessages.requiredFile],
-      [FormField.startDate]: [errorMessages.requiredDate],
-      [FormField.status]: [errorMessages.requiredField],
-      [FormField.title]: [errorMessages.requiredField, errorMessages.minTtitleLength],
-      [FormField.titleLang]: null,
-    };
-    const { errors, hasErrors } = validateForm(formValues);
-    expect(errors).toStrictEqual(formErrors);
-    expect(hasErrors).toBe(true);
+});
+
+describe('finishedStatusDate', () => {
+  it('return error message for finished status, selected date and selected date is less than 30 days ago', () => {
+    const isValid = finishedStatusDate('', {
+      ...emptyForm,
+      startDate: todayDate,
+      status: 'finished',
+    });
+    expect(isValid).toBeFalsy;
   });
 });

@@ -1,17 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
 import Forms from './index';
+import { pagesData } from 'consts/router';
 
 describe('Forms page', () => {
   it('renders Forms page', () => {
-    const { getByTestId } = render(
-      <MemoryRouter>
-        <Forms />
-      </MemoryRouter>
-    );
-    const pageComponent = getByTestId('formsPage');
+    const { getByTestId } = render(<Forms />);
+    const pageComponent = getByTestId(pagesData.forms.testId);
     const form = getByTestId('mangaForm');
     const cardsListComponent = getByTestId('formsCardsList');
 

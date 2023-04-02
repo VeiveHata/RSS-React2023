@@ -1,4 +1,4 @@
-import { FormErrors, SelectOption } from 'types/form';
+import { FormErrorsTypes, SelectOption } from 'types/form';
 import { MangaStatus, TitleLanguage } from 'types/manga';
 
 export const languageOptions: SelectOption<TitleLanguage>[] = [
@@ -14,21 +14,11 @@ export const statusOptions: SelectOption<MangaStatus>[] = [
   { value: 'tba', text: 'To be announced' },
 ];
 
-export const emptyFormErrors: FormErrors = {
-  canonicalTitle: null,
-  description: null,
-  poster: null,
-  startDate: null,
-  status: null,
-  title: null,
-  titleLang: null,
-};
-
 export const MIN_DESCRIPTION_LENGTH = 50;
 export const MIN_TITLE_LENGTH = 5;
 export const MOST_RECENT_MANGA_DAYS = 30;
 
-export const errorMessages = {
+export const errorMessages: Record<FormErrorsTypes, string> = {
   requiredField: 'This field is requiered',
   requiredFile: 'Please upload a file',
   requiredDate: 'Date should be specified',

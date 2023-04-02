@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { emptyForm, validFormValues } from 'mock/formMock';
-import { FormField, FormObject } from 'types/form';
+import { FormField, FormValues } from 'types/form';
 import { Form } from '.';
 
 describe('Forms page', () => {
@@ -26,7 +26,7 @@ describe('Forms page', () => {
     submitButton = getByTestId('formSubmitButton');
   };
 
-  const setFormValues = (values: FormObject) => {
+  const setFormValues = (values: FormValues) => {
     fireEvent.change(titlesInput, { target: { value: values.title } });
     fireEvent.change(canonicalTitleInput, {
       target: { value: values.canonicalTitle },
@@ -46,7 +46,7 @@ describe('Forms page', () => {
       description: validFormValues.description,
       poster: '',
       startDate: '',
-      status: 'on',
+      status: validFormValues.status,
       title: validFormValues.title,
       titleLang: validFormValues.titleLang,
     });

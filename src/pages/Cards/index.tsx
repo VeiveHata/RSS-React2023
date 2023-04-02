@@ -1,22 +1,22 @@
 import { SearchInput } from 'components/SearchInput';
-import { Page } from 'components/Page';
 import React from 'react';
 import { mangaList } from 'mock/cardsMock';
 import './styles.css';
 import { CardsList } from 'components/CardsList';
-class Cards extends React.Component {
-  onSearch = (value: string) => {
+import { PageContent } from 'components/PageContent';
+import { pagesData } from 'consts/router';
+
+const Cards: React.FC = () => {
+  const onSearch = (value: string) => {
     console.log(value);
   };
 
-  render() {
-    return (
-      <Page className="cards" name="home" testId="cardsPage">
-        <SearchInput onSearch={this.onSearch} name="cardsSearch" withSave />
-        <CardsList mangaList={mangaList} />
-      </Page>
-    );
-  }
-}
+  return (
+    <PageContent testId={pagesData.library.testId}>
+      <SearchInput onSearch={onSearch} name="cardsSearch" withSave />
+      <CardsList mangaList={mangaList} />
+    </PageContent>
+  );
+};
 
 export default Cards;

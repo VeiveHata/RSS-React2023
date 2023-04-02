@@ -8,24 +8,21 @@ type VolumeInfoProps = {
   volumeCount: Nullable<number>;
 };
 
-export class VolumeInfo extends React.Component<VolumeInfoProps> {
-  render() {
-    const { volumeCount, chapterCount } = this.props;
-    return (
-      <div className="volume-info">
-        <ConditionalRender condition={Boolean(volumeCount)}>
-          <section className="count">
-            <BookIcon />
-            {volumeCount}
-          </section>
-        </ConditionalRender>
-        <ConditionalRender condition={Boolean(chapterCount)}>
-          <section className="count">
-            <PageIcon />
-            {chapterCount}
-          </section>
-        </ConditionalRender>
-      </div>
-    );
-  }
-}
+export const VolumeInfo: React.FC<VolumeInfoProps> = ({ volumeCount, chapterCount }) => {
+  return (
+    <div className="volume-info">
+      <ConditionalRender condition={Boolean(volumeCount)}>
+        <section className="count">
+          <BookIcon />
+          {volumeCount}
+        </section>
+      </ConditionalRender>
+      <ConditionalRender condition={Boolean(chapterCount)}>
+        <section className="count">
+          <PageIcon />
+          {chapterCount}
+        </section>
+      </ConditionalRender>
+    </div>
+  );
+};

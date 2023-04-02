@@ -1,40 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Pages, RouterData } from 'types/route';
+import { PageInfo, Pages } from 'types/route';
 import './styles.css';
 
 type HeaderProps = {
   name: Pages;
-  routes: RouterData;
+  links: PageInfo[];
 };
 
-export class Header extends React.Component<HeaderProps> {
-  render() {
-    const { routes, name } = this.props;
-    return (
-      <div className="header" data-testid="header">
-        <h2 data-testid="headerTitle">{routes[name].title}</h2>
-        <div className="links">
+export const Header: React.FC<HeaderProps> = ({ links, name }) => {
+  const currentPage = links.find((link) => link.name === name) || links[0];
+  return (
+    <div className="header" data-testid="header">
+      <h2 data-testid="headerTitle">{currentPage.title}</h2>
+      <div className="links">
+        {links.map((link) => (
           <Link
-            to={routes.home.path}
-            className={`link ${name === routes.home.name ? 'ative-link' : ''}`}
+            to={link.path}
+            className={`link ${currentPage.name === link.name ? 'ative-link' : ''}`}
+            key={link.name}
           >
-            {routes.home.title}
+            {link.title}
           </Link>
-          <Link
-            to={routes.about.path}
-            className={`link ${name === routes.about.name ? 'ative-link' : ''}`}
-          >
-            {routes.about.title}
-          </Link>
-          <Link
-            to={routes.forms.path}
-            className={`link ${name === routes.forms.name ? 'ative-link' : ''}`}
-          >
-            {routes.forms.title}
-          </Link>
-        </div>
+        ))}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};

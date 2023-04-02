@@ -1,10 +1,11 @@
 import { Poster, Titles } from './manga';
-import { Nullable } from './utils';
+import { UseFormRegister, FieldError } from 'react-hook-form';
 
 export type SelectOption<T> = { value: T; text: string };
 export type InputProps = {
-  name: string;
-  errors?: Nullable<string[]>;
+  name: FormField;
+  errors?: FieldError;
+  register: UseFormRegister<FormValues>;
 };
 
 export enum FormField {
@@ -17,9 +18,7 @@ export enum FormField {
   status = 'status',
 }
 
-export type FormElements = Record<FormField, HTMLInputElement>;
-
-export type FormObject = {
+export type FormValues = {
   [FormField.canonicalTitle]: boolean;
   [FormField.description]: string;
   [FormField.poster]: File | undefined;
@@ -38,4 +37,19 @@ export interface FormSubmitValues {
   status: string;
 }
 
-export type FormErrors = Record<FormField, string[] | null>;
+export enum FormErrorsTypes {
+  requiredField = 'requiredField',
+  requiredFile = 'requiredFile',
+  requiredDate = 'requiredDate',
+  minDescriptionLength = 'minDescriptionLength',
+  minTtitleLength = 'minTtitleLength',
+  tbaWithDate = 'tbaWithDate',
+  currentWithTodayDate = 'currentWithTodayDate',
+  finishedWithEarlyDate = 'finishedWithEarlyDate',
+}
+
+export type InputValue = string | boolean | File | undefined;
+
+export type FormErrors = Partial<
+  Record<FormErrorsTypes, (value: InputValue, formValues: FormValues) => boolean>
+>;

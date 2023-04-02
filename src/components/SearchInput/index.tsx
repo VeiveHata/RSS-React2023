@@ -1,5 +1,5 @@
 import { Button } from 'components/Button';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { getValueFromLS, setValueToLS } from 'utils/localStorage';
 import './styles.css';
 
@@ -10,51 +10,49 @@ type SearchInputProps = {
   withSave?: boolean;
 };
 
-type SearchInputStateProps = {
-  value: string;
+export const SearchInput: React.FC<SearchInputProps> = ({
+  defaultValue,
+  onSearch,
+  name,
+  withSave,
+}) => {
+  const [value, setValue] = useState<string>(defaultValue || '');
+
+  useEffect(() => {
+    if (withSave) {
+      const savedValue = getValueFromLS(name || 'input');
+      setValue(savedValue);
+    }
+
+    return () => {
+      if (withSave) {
+        setValueToLS(name || 'input', value);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
+  const onSearchClick = () => {
+    onSearch(value);
+  };
+
+  return (
+    <div className="input-wrapper">
+      <input
+        type="search"
+        name={name}
+        value={value}
+        onChange={onSearchInputChange}
+        className="input"
+        data-testid="searchInput"
+      />
+      <Button id="serachButton" onClick={onSearchClick}>
+        Search
+      </Button>
+    </div>
+  );
 };
-
-export class SearchInput extends React.Component<SearchInputProps, SearchInputStateProps> {
-  state = {
-    value: this.props.defaultValue || '',
-  };
-
-  componentDidMount() {
-    if (this.props.withSave) {
-      const savedValue = getValueFromLS(this.props.name || 'input');
-      this.setState({ value: savedValue });
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.props.withSave) {
-      setValueToLS(this.props.name || 'input', this.state.value);
-    }
-  }
-
-  onSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: event.target.value });
-  };
-
-  onSearchClick = () => {
-    this.props.onSearch(this.state.value);
-  };
-
-  render() {
-    return (
-      <div className="input-wrapper">
-        <input
-          type="search"
-          name={this.props.name}
-          value={this.state.value}
-          onChange={this.onSearchInputChange}
-          className="input"
-          data-testid="searchInput"
-        />
-        <Button id="serachButton" onClick={this.onSearchClick}>
-          Search
-        </Button>
-      </div>
-    );
-  }
-}

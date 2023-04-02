@@ -1,12 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 import './styles.css';
 
-export class TitleH2 extends React.Component<PropsWithChildren> {
-  render() {
-    return (
-      <h2 data-testid="titleH2" className="h2">
-        {this.props.children}
-      </h2>
-    );
-  }
-}
+export const TitleH2: React.FC<PropsWithChildren> = ({ children }) => {
+  return (
+    <h2 data-testid="titleH2" className="h2">
+      {children}
+    </h2>
+  );
+};

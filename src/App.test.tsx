@@ -1,41 +1,34 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
-import { routes } from 'consts/router';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { pagesData } from 'consts/router';
 import { describe } from 'vitest';
 
 describe('main page', () => {
   it('renders without crashing', () => {
-    const { container } = render(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
-
+    const { container } = render(<App />);
     expect(container.firstChild).toBeInTheDocument();
   });
 });
 
 describe('App', () => {
   const routeCheck = (route: string, testId: string) => {
-    const { getByTestId } = render(
-      <MemoryRouter initialEntries={[route]}>
-        <App />
-      </MemoryRouter>
-    );
+    window.history.pushState({}, 'Test page', route);
+    const { getByTestId } = render(<App />);
+
     expect(getByTestId(testId)).toBeInTheDocument();
   };
+
   it('render Cards Page', () => {
-    routeCheck(routes.home.path, 'cardsPage');
+    routeCheck(pagesData.library.path, pagesData.library.testId);
   });
   it('render About Page', () => {
-    routeCheck(routes.about.path, 'aboutPage');
+    routeCheck(pagesData.about.path, pagesData.about.testId);
   });
   it('render 404 Page', () => {
-    routeCheck('/not-exist-page', 'notFoundPage');
+    routeCheck('/not-exist-page', pagesData.unknown.testId);
   });
   it('render Forms Page', () => {
-    routeCheck(routes.forms.path, 'formsPage');
+    routeCheck(pagesData.forms.path, pagesData.forms.testId);
   });
 });
