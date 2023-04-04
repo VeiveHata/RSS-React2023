@@ -15,7 +15,6 @@ export const Pagination: React.FC<PaginationProps> = ({ current, total, onPageCh
     const firstNumber = tryGetFirst > 0 ? tryGetFirst : 1;
     const lastNumber = tryGetLast < total ? tryGetLast : total;
     const steps = [];
-    console.log(current, total);
     for (let step = firstNumber || 1; step < lastNumber + 1; step++) {
       steps.push(step);
     }

@@ -1,5 +1,5 @@
 import { SearchInput } from 'components/SearchInput';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.css';
 import { CardsList } from 'components/CardsList';
 import { PageContent } from 'components/PageContent';
@@ -13,6 +13,7 @@ import { usePagination } from 'hooks/usePagination';
 const defaultPagination = 10;
 
 const Cards: React.FC = () => {
+  const [query, setQuery] = useState('');
   const { getList, data, loading, error, total } = useGetMangaList<Manga[]>({ defaultPagination });
   const {
     currentPage,
@@ -24,21 +25,19 @@ const Cards: React.FC = () => {
     pagination: defaultPagination,
   });
 
-  const onSearch = (value: string) => {
-    getList({ filter: value });
+  const getPage = (page: number) => {
+    onPageChange(page, (offset) => getList({ filter: query, offset: `${offset}` }));
   };
 
   useEffect(() => {
-    getList({});
-  }, []);
-
-  const getPage = (page: number) => {
-    onPageChange(page, (offset) => getList({ offset: `${offset}` }));
-  };
+    getList({ filter: query, offset: '0' });
+    onPageChange(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
   return (
     <PageContent testId={pagesData.library.testId}>
-      <SearchInput onSearch={onSearch} name="cardsSearch" withSave />
+      <SearchInput onSearch={setQuery} name="cardsSearch" withSave />
       {loading && <div>Loading...</div>}
       <ConditionalRender condition={!loading && !!data && !error}>
         <CardsList mangaList={data} />

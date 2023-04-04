@@ -10,10 +10,10 @@ export const usePagination = ({ totalCount, pagination, initialPage }: UsePagina
   const [page, setPage] = useState(initialPage);
 
   const onPageChange = useCallback(
-    (selectedPage: number, callback: (offsetValue: number) => void) => {
+    (selectedPage: number, callback?: (offsetValue: number) => void) => {
       setPage(selectedPage);
       const offset = (selectedPage - 1) * pagination;
-      callback(offset);
+      callback && callback(offset);
     },
     [pagination]
   );

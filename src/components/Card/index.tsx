@@ -41,7 +41,9 @@ export const Card: React.FC<CardProps> = ({
       </div>
       <div className="card-content">
         <Title titles={titles} canonicalTitle={canonicalTitle} />
-        <section className="description">{synopsis || description}</section>
+        <ConditionalRender condition={Boolean(synopsis || description)}>
+          <section className="description">{synopsis || description}</section>
+        </ConditionalRender>
         <section className="card-footer">
           <ConditionalRender condition={Boolean(serialization)}>
             <h5 data-testid="serialization" className="serialization">

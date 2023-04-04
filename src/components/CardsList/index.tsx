@@ -15,8 +15,6 @@ export const CardsList: React.FC<{ mangaList: Manga[] }> = ({ mangaList }) => {
             posterImage={attributes.posterImage}
             canonicalTitle={attributes.canonicalTitle}
             titles={attributes.titles}
-            description={attributes.description}
-            synopsis={attributes.synopsis}
             serialization={attributes.serialization}
             chapterCount={attributes.chapterCount}
             volumeCount={attributes.volumeCount}
