@@ -9,11 +9,13 @@ import { Manga } from 'types/manga';
 import { Pagination } from 'components/Pagination';
 import { ConditionalRender } from 'components/ConditionalRender';
 import { usePagination } from 'hooks/usePagination';
+import { Modal } from 'components/Modal';
 
 const defaultPagination = 10;
 
 const Cards: React.FC = () => {
   const [query, setQuery] = useState('');
+  const [selectedCard, setSelectedCard] = useState('');
   const { getList, data, loading, error, total } = useGetMangaList<Manga[]>({ defaultPagination });
   const {
     currentPage,
@@ -35,15 +37,24 @@ const Cards: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
+  const onCardSelect = (id: string) => {
+    setSelectedCard(id);
+  };
+
+  const onModalClose = () => {
+    setSelectedCard('');
+  };
+
   return (
     <PageContent testId={pagesData.library.testId}>
       <SearchInput onSearch={setQuery} name="cardsSearch" withSave />
       {loading && <div>Loading...</div>}
       <ConditionalRender condition={!loading && !!data && !error}>
-        <CardsList mangaList={data} />
+        <CardsList mangaList={data} onCardSelect={onCardSelect} />
         <Pagination current={currentPage} total={totalPagesNumber} onPageChange={getPage} />
         <div>Total: {total}</div>
       </ConditionalRender>
+      <Modal visible={!!selectedCard} onClose={onModalClose} />
     </PageContent>
   );
 };

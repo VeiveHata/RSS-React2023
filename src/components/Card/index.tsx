@@ -19,6 +19,7 @@ type CardProps = {
   serialization?: Nullable<string>;
   chapterCount?: Nullable<number>;
   volumeCount?: Nullable<number>;
+  onClick?: () => void;
 };
 
 export const Card: React.FC<CardProps> = ({
@@ -32,9 +33,10 @@ export const Card: React.FC<CardProps> = ({
   serialization,
   chapterCount = null,
   volumeCount = null,
+  onClick,
 }) => {
   return (
-    <div className="card">
+    <div className="card" onClick={onClick}>
       <div className="poster">
         <StatusInfo status={status} rating={averageRating} />
         <img className="card-image" src={getPoster(posterImage)} />
