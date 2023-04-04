@@ -54,35 +54,33 @@ export const useFetch = <T>() => {
     loading,
     error,
     response: responseData,
-  } as const;
+  };
 };
 
-export const useGetMangaList = <T>() => {
+export const useGetMangaList = <T>({ defaultPagination = 10 }: { defaultPagination?: number }) => {
   const { fetchData, loading, error, response } = useFetch<T>();
 
   const getList = useCallback(
     ({
-      pagination = '10',
+      pagination = `${defaultPagination}`,
+      offset = '0',
       sort = '-averageRating',
       filter = '',
-      url,
     }: {
       pagination?: string;
+      offset?: string;
       sort?: string;
       filter?: string;
-      url?: string;
     }) => {
-      if (url) {
-        return fetchData(url);
-      }
       const listOptions = new URLSearchParams({
         ...(filter ? { 'filter[text]': filter } : {}),
         sort: sort,
         'page[limit]': pagination,
+        'page[offset]': offset,
       });
       return fetchData(`${apiUrl}/manga?${listOptions}`);
     },
-    [fetchData]
+    [defaultPagination, fetchData]
   );
 
   return {
@@ -90,7 +88,6 @@ export const useGetMangaList = <T>() => {
     data: response?.data || [],
     loading,
     error,
-    pagination: response?.links,
     total: response?.meta.count,
   };
 };

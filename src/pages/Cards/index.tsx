@@ -8,9 +8,22 @@ import { useGetMangaList } from 'hooks/useFetch';
 import { Manga } from 'types/manga';
 import { Pagination } from 'components/Pagination';
 import { ConditionalRender } from 'components/ConditionalRender';
+import { usePagination } from 'hooks/usePagination';
+
+const defaultPagination = 10;
 
 const Cards: React.FC = () => {
-  const { getList, data, loading, error, pagination, total } = useGetMangaList<Manga[]>();
+  const { getList, data, loading, error, total } = useGetMangaList<Manga[]>({ defaultPagination });
+  const {
+    currentPage,
+    onPageChange,
+    total: totalPagesNumber,
+  } = usePagination({
+    totalCount: Number(total),
+    initialPage: 1,
+    pagination: defaultPagination,
+  });
+
   const onSearch = (value: string) => {
     getList({ filter: value });
   };
@@ -19,16 +32,8 @@ const Cards: React.FC = () => {
     getList({});
   }, []);
 
-  const getFirstPage = () => {
-    getList({ url: pagination?.first });
-  };
-
-  const getNextPage = () => {
-    getList({ url: pagination?.next });
-  };
-
-  const getLastPage = () => {
-    getList({ url: pagination?.last });
+  const getPage = (page: number) => {
+    onPageChange(page, (offset) => getList({ offset: `${offset}` }));
   };
 
   return (
@@ -37,7 +42,7 @@ const Cards: React.FC = () => {
       {loading && <div>Loading...</div>}
       <ConditionalRender condition={!loading && !!data && !error}>
         <CardsList mangaList={data} />
-        <Pagination onLast={getLastPage} onNext={getNextPage} onFirst={getFirstPage} />
+        <Pagination current={currentPage} total={totalPagesNumber} onPageChange={getPage} />
         <div>Total: {total}</div>
       </ConditionalRender>
     </PageContent>
