@@ -11,6 +11,7 @@ import { ConditionalRender } from 'components/ConditionalRender';
 import { usePagination } from 'hooks/usePagination';
 import { Modal } from 'components/Modal';
 import { CardModalInfo } from 'components/CardModalInfo';
+import { Loading } from 'components/Loading';
 
 const defaultPagination = 10;
 
@@ -49,7 +50,7 @@ const Cards: React.FC = () => {
   return (
     <PageContent testId={pagesData.library.testId}>
       <SearchInput onSearch={setQuery} name="cardsSearch" withSave />
-      {loading && <div>Loading...</div>}
+      {loading && <Loading />}
       <ConditionalRender condition={!loading && !!data && !error}>
         <CardsList mangaList={data} onCardSelect={onCardSelect} />
         <Pagination current={currentPage} total={totalPagesNumber} onPageChange={getPage} />

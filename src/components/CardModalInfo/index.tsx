@@ -9,6 +9,7 @@ import { MediaImage } from 'components/Media';
 import { InfoSection } from './InfoSection';
 import { VolumeInfo } from 'components/VolumeInfo';
 import { getStatusTitle } from 'utils/common';
+import { Loading } from 'components/Loading';
 
 type CardModalInfoProps = {
   id: string;
@@ -38,7 +39,7 @@ export const CardModalInfo: React.FC<CardModalInfoProps> = ({ id }) => {
   return (
     <>
       <ConditionalRender condition={loading}>
-        <div>Loading...</div>
+        <Loading />
       </ConditionalRender>
       <ConditionalRender condition={!loading}>
         {data && (
@@ -70,7 +71,10 @@ export const CardModalInfo: React.FC<CardModalInfoProps> = ({ id }) => {
                 info={(categories?.data || []).map((c) => c.attributes.title)}
                 loading={categoriesLoading}
               />
-              <InfoSection name="Serialization" info={[data.attributes.serialization || '']} />
+              <InfoSection
+                name="Serialization"
+                info={data.attributes.serialization ? [data.attributes.serialization] : []}
+              />
               <div className="card-modal-description">
                 {data.attributes.description || data.attributes.synopsis}
               </div>

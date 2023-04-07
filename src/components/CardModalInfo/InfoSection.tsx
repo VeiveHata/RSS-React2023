@@ -13,7 +13,7 @@ export const InfoSection: React.FC<InfoSectionProps> = ({ name, info, loading })
     <div className="info-section">
       <TitleH4>{name}</TitleH4>
       <ConditionalRender condition={!!loading}>
-        <div>Loading...</div>
+        <span>Loading...</span>
       </ConditionalRender>
       <ConditionalRender condition={!loading}>
         <span className="info-section-info">{!!info.length ? info.join(', ') : 'No data'}</span>
