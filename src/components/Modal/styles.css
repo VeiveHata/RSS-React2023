@@ -10,12 +10,12 @@
 .modal {
   width: 70vw;
   max-width: 90%;
-  height: 70vh;
+  height: 90vh;
   max-height: 90%;
   border-radius: 4px;
   background-color: var(--light-color);
   position: absolute;
-  top: 20vh;
+  top: 5vh;
   margin-left: auto;
   margin-right: auto;
   left: 0;

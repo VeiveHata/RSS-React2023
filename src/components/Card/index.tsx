@@ -7,6 +7,7 @@ import { StatusInfo } from './StatusInfo';
 import './styles.css';
 import { Title } from './Title';
 import { VolumeInfo } from '../VolumeInfo';
+import { MediaImage } from 'components/Media';
 
 type CardProps = {
   averageRating?: Nullable<string>;
@@ -39,7 +40,9 @@ export const Card: React.FC<CardProps> = ({
     <div className="card" onClick={onClick}>
       <div className="poster">
         <StatusInfo status={status} rating={averageRating} />
-        <img className="card-image" src={getPoster(posterImage)} />
+        <div className="card-image">
+          <MediaImage src={getPoster(posterImage)} />
+        </div>
       </div>
       <div className="card-content">
         <Title titles={titles} canonicalTitle={canonicalTitle} />
