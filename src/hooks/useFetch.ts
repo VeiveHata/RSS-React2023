@@ -64,7 +64,6 @@ export const useGetMangaList = <T>({ defaultPagination = 10 }: { defaultPaginati
     ({
       pagination = `${defaultPagination}`,
       offset = '0',
-      sort = '-averageRating',
       filter = '',
     }: {
       pagination?: string;
@@ -74,7 +73,6 @@ export const useGetMangaList = <T>({ defaultPagination = 10 }: { defaultPaginati
     }) => {
       const listOptions = new URLSearchParams({
         ...(filter ? { 'filter[text]': filter } : {}),
-        sort: sort,
         'page[limit]': pagination,
         'page[offset]': offset,
       });

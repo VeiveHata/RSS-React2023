@@ -8,14 +8,26 @@ type PaginationProps = {
   onPageChange: (page: number) => void;
 };
 
+const paginationPages = 10;
+
 export const Pagination: React.FC<PaginationProps> = ({ current, total, onPageChange }) => {
   const visibleNumbers = useMemo(() => {
-    const tryGetFirst = current - 5;
-    const tryGetLast = current + 5;
-    const firstNumber = tryGetFirst > 0 ? tryGetFirst : 1;
-    const lastNumber = tryGetLast < total ? tryGetLast : total;
+    const half = paginationPages / 2;
+    let firstNumber = current - half;
+    let lastNumber = current + half;
+
+    if (current <= half) {
+      firstNumber = 1;
+      lastNumber = paginationPages;
+    }
+
+    if (current >= total - half) {
+      firstNumber = total - paginationPages;
+      lastNumber = total;
+    }
+
     const steps = [];
-    for (let step = firstNumber || 1; step < lastNumber + 1; step++) {
+    for (let step = firstNumber || 1; step <= lastNumber; step++) {
       steps.push(step);
     }
     return steps;
