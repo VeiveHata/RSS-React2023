@@ -143,3 +143,51 @@ export interface Manga {
     };
   };
 }
+
+type RelationshipType = 'genres';
+export interface Genre {
+  id: string;
+  type: RelationshipType;
+  links: {
+    self: string;
+  };
+  attributes: {
+    createdAt: string;
+    updatedAt: string;
+    name: string;
+    slug: string;
+    description: string;
+  };
+}
+
+export interface Category {
+  id: string;
+  type: string;
+  links: {
+    self: string;
+  };
+  attributes: {
+    createdAt: string;
+    updatedAt: string;
+    title: string;
+    description: string;
+    totalMediaCount: number;
+    slug: string;
+    nsfw: boolean;
+    childCount: number;
+  };
+  relationships: {
+    parent: {
+      links: Links;
+    };
+    anime: {
+      links: Links;
+    };
+    drama: {
+      links: Links;
+    };
+    manga: {
+      links: Links;
+    };
+  };
+}

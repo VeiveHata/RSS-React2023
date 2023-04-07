@@ -10,6 +10,7 @@ import { Pagination } from 'components/Pagination';
 import { ConditionalRender } from 'components/ConditionalRender';
 import { usePagination } from 'hooks/usePagination';
 import { Modal } from 'components/Modal';
+import { CardModalInfo } from 'components/CardModalInfo';
 
 const defaultPagination = 10;
 
@@ -54,7 +55,9 @@ const Cards: React.FC = () => {
         <Pagination current={currentPage} total={totalPagesNumber} onPageChange={getPage} />
         <div>Total: {total}</div>
       </ConditionalRender>
-      <Modal visible={!!selectedCard} onClose={onModalClose} />
+      <Modal visible={!!selectedCard} onClose={onModalClose}>
+        <CardModalInfo id={selectedCard} />
+      </Modal>
     </PageContent>
   );
 };

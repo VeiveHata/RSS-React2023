@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const apiUrl = 'https://kitsu.io/api/edge';
 
@@ -89,5 +89,20 @@ export const useGetMangaList = <T>({ defaultPagination = 10 }: { defaultPaginati
     loading,
     error,
     total: response?.meta.count,
+  };
+};
+
+export const useGetMangaItem = <T>({ id }: { id: string }) => {
+  const { fetchData, loading, error, response } = useFetch<T>();
+
+  useEffect(() => {
+    fetchData(`${apiUrl}/manga/${id}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  return {
+    data: response?.data,
+    loading,
+    error,
   };
 };

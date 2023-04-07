@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import './styles.css';
+import { ConditionalRender } from 'components/ConditionalRender';
 
 type ModalProps = PropsWithChildren & {
   visible: boolean;
@@ -8,13 +9,15 @@ type ModalProps = PropsWithChildren & {
 
 export const Modal: React.FC<ModalProps> = ({ children, visible, onClose }) => {
   return (
-    <div className={`modal-wrapper ${visible ? 'visible-modal' : ''}`}>
-      <div className="modal">
-        <button className="close-modal" onClick={onClose}>
-          X
-        </button>
-        {children}
+    <ConditionalRender condition={visible}>
+      <div className="modal-wrapper">
+        <div className="modal">
+          <button className="close-modal" onClick={onClose}>
+            X
+          </button>
+          {children}
+        </div>
       </div>
-    </div>
+    </ConditionalRender>
   );
 };

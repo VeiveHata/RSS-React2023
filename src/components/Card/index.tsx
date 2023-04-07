@@ -6,7 +6,7 @@ import { getPoster } from 'utils/card';
 import { StatusInfo } from './StatusInfo';
 import './styles.css';
 import { Title } from './Title';
-import { VolumeInfo } from './VolumeInfo';
+import { VolumeInfo } from '../VolumeInfo';
 
 type CardProps = {
   averageRating?: Nullable<string>;
