@@ -1,9 +1,9 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import Cards from './index';
 import { pagesData } from 'consts/router';
-import { mangaList } from 'mock/cardsMock';
+import { apiTestMangaItem, mangaList } from 'mock/mangaMock';
 
 describe('Cards page', () => {
   it('renders Cards page', () => {
@@ -11,7 +11,7 @@ describe('Cards page', () => {
     const pageComponent = getByTestId(pagesData.library.testId);
     expect(pageComponent).toBeInTheDocument();
   });
-  it('fetches and display cards on the page', async () => {
+  it('fetches and display loading and cards on the page', async () => {
     const { getByTestId } = render(<Cards />);
     const loadingComponent = getByTestId('loading');
     expect(loadingComponent).toBeInTheDocument();
@@ -20,5 +20,21 @@ describe('Cards page', () => {
       const firstCard = getByTestId(`card-${mangaList[0].id}`);
       expect(firstCard).toBeInTheDocument();
     });
+  });
+});
+
+describe('Card selection', () => {
+  it('fetch manga item info and open the modal', async () => {
+    const { getByTestId } = render(<Cards />);
+
+    let testCard;
+    await waitFor(() => {
+      testCard = getByTestId(`card-${apiTestMangaItem.id}`);
+      expect(testCard).toBeInTheDocument();
+      fireEvent.click(testCard);
+    });
+
+    const modal = getByTestId('modal');
+    expect(modal).toBeInTheDocument();
   });
 });

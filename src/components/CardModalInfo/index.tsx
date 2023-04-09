@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './styles.css';
 import { useFetch, useGetMangaItem } from 'hooks/useFetch';
-import { Manga, Genre, Category } from 'types/manga';
+import { Genre, Category } from 'types/manga';
 import { ConditionalRender } from 'components/ConditionalRender';
 import { getPoster } from 'utils/card';
 import { Title } from 'components/Card/Title';
@@ -10,19 +10,24 @@ import { InfoSection } from './InfoSection';
 import { VolumeInfo } from 'components/VolumeInfo';
 import { getStatusTitle } from 'utils/common';
 import { Loading } from 'components/Loading';
+import { ResponseListStructure } from 'types/api';
 
 type CardModalInfoProps = {
   id: string;
 };
 
 export const CardModalInfo: React.FC<CardModalInfoProps> = ({ id }) => {
-  const { data, loading } = useGetMangaItem<Manga>({ id });
-  const { fetchData: fetchGenres, loading: genresLoading, response: genres } = useFetch<Genre[]>();
+  const { data, loading } = useGetMangaItem({ id });
+  const {
+    fetchData: fetchGenres,
+    loading: genresLoading,
+    response: genres,
+  } = useFetch<ResponseListStructure<Genre>>();
   const {
     fetchData: fetchCategories,
     loading: categoriesLoading,
     response: categories,
-  } = useFetch<Category[]>();
+  } = useFetch<ResponseListStructure<Category>>();
 
   useEffect(() => {
     if (data && !genres && !genresLoading) {

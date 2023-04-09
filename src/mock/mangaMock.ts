@@ -1,4 +1,4 @@
-import { Manga } from 'types/manga';
+import { Category, Genre, Manga } from 'types/manga';
 
 export const mockCardItem: Manga = {
   id: '1',
@@ -355,6 +355,228 @@ export const emptyMockItem: Manga = {
       links: {
         self: 'https://kitsu.io/api/edge/manga/1/relationships/manga-staff',
         related: 'https://kitsu.io/api/edge/manga/1/manga-staff',
+      },
+    },
+  },
+};
+
+export const apiTestMangaItem: Manga = {
+  id: '8',
+  type: 'manga',
+  links: {
+    self: 'https://kitsu.io/api/edge/manga/8',
+  },
+  attributes: {
+    createdAt: '2013-12-18T13:48:25.461Z',
+    updatedAt: '2023-04-09T12:00:17.813Z',
+    slug: 'berserk',
+    synopsis:
+      "His name is Guts, the Black Swordsman, a feared warrior spoken of only in whispers. Bearer of a gigantic sword, an iron hand, and the scars of countless battles and tortures, his flesh is also indelibly marked with The Brand, an unholy symbol that draws the forces of darkness to him and dooms him as their sacrifice. But Guts won't take his fate lying down; he'll cut a crimson swath of carnage through the ranks of the damned—and anyone else foolish enough to oppose him! Accompanied by Puck the Elf, more an annoyance than a companion, Guts relentlessly follows a dark, bloodstained path that leads only to death...or vengeance.\n\n(Source: Dark Horse)\n\nNotes:\n- Volumes 1-5 contain the 16 prequel chapters 0A - 0P.\n- Chapter 83 was omitted from Volume 13 due to the author’s request.\n- Volume 14 includes “Berserk: The Prototype”.\n- Due to the author's passing, starting from Chapter 365, the manga is illustrated by Studio Gaga (Miura's assistants) and supervised by Kouji Mori (a close friend of Miura's).",
+    description:
+      "His name is Guts, the Black Swordsman, a feared warrior spoken of only in whispers. Bearer of a gigantic sword, an iron hand, and the scars of countless battles and tortures, his flesh is also indelibly marked with The Brand, an unholy symbol that draws the forces of darkness to him and dooms him as their sacrifice. But Guts won't take his fate lying down; he'll cut a crimson swath of carnage through the ranks of the damned—and anyone else foolish enough to oppose him! Accompanied by Puck the Elf, more an annoyance than a companion, Guts relentlessly follows a dark, bloodstained path that leads only to death...or vengeance.\n\n(Source: Dark Horse)\n\nNotes:\n- Volumes 1-5 contain the 16 prequel chapters 0A - 0P.\n- Chapter 83 was omitted from Volume 13 due to the author’s request.\n- Volume 14 includes “Berserk: The Prototype”.\n- Due to the author's passing, starting from Chapter 365, the manga is illustrated by Studio Gaga (Miura's assistants) and supervised by Kouji Mori (a close friend of Miura's).",
+    coverImageTopOffset: 200,
+    titles: {
+      en: 'Berserk',
+      en_jp: 'Berserk',
+      en_us: 'Berserk',
+      ja_jp: 'ベルセルク',
+    },
+    canonicalTitle: 'Berserk',
+    abbreviatedTitles: ['Berserk: The Prototype'],
+    averageRating: '84.22',
+    ratingFrequencies: {
+      '2': '1579',
+      '3': '22',
+      '4': '48',
+      '5': '25',
+      '6': '40',
+      '7': '11',
+      '8': '1043',
+      '9': '11',
+      '10': '87',
+      '11': '26',
+      '12': '185',
+      '13': '34',
+      '14': '1731',
+      '15': '75',
+      '16': '1143',
+      '17': '236',
+      '18': '2175',
+      '19': '398',
+      '20': '12651',
+    },
+    userCount: 29647,
+    favoritesCount: 2755,
+    startDate: '1989-08-25',
+    endDate: null,
+    nextRelease: null,
+    popularityRank: 20,
+    ratingRank: 24,
+    ageRating: 'R',
+    ageRatingGuide: 'Horror',
+    subtype: 'manga',
+    status: 'current',
+    tba: null,
+    posterImage: {
+      tiny: 'https://media.kitsu.io/manga/8/poster_image/tiny-ad1df8a063d11baf9fda08160deffc00.jpeg',
+      large:
+        'https://media.kitsu.io/manga/8/poster_image/large-f598ed525107bcb69ebda5bf36c6910d.jpeg',
+      small:
+        'https://media.kitsu.io/manga/8/poster_image/small-bdf7be96b4337627856b36e0be0241fb.jpeg',
+      medium:
+        'https://media.kitsu.io/manga/8/poster_image/medium-8edd6ddb0c6ec34a54521487ee81fb02.jpeg',
+      original: 'https://media.kitsu.io/manga/8/poster_image/67d602c20d1bf0eeb43e1a363c59ed5b.jpg',
+      meta: {
+        dimensions: {
+          tiny: {
+            width: 110,
+            height: 156,
+          },
+          large: {
+            width: 550,
+            height: 780,
+          },
+          small: {
+            width: 284,
+            height: 402,
+          },
+          medium: {
+            width: 390,
+            height: 554,
+          },
+        },
+      },
+    },
+    coverImage: {
+      tiny: 'https://media.kitsu.io/manga/8/cover_image/tiny-a61e4ae3c11698a65c0ecdd6cd3e86bd.gif',
+      large:
+        'https://media.kitsu.io/manga/8/cover_image/large-d976a1baf3051d321608d4ebb7da4220.gif',
+      small:
+        'https://media.kitsu.io/manga/8/cover_image/small-dd96d5ac1412ccabb1bcca3fe89747f5.gif',
+      tiny_webp:
+        'https://media.kitsu.io/manga/8/cover_image/tiny_webp-90fec06d293be542b08f362b457bce04.webp',
+      large_webp:
+        'https://media.kitsu.io/manga/8/cover_image/large_webp-e735c50a70351a02998742aa8f1424a6.webp',
+      small_webp:
+        'https://media.kitsu.io/manga/8/cover_image/small_webp-645e5266280fa6c4032f54823eb6413a.webp',
+      original: 'https://media.kitsu.io/manga/cover_images/8/original.jpg',
+      meta: {
+        dimensions: {
+          tiny: {
+            width: 840,
+            height: 200,
+          },
+          large: {
+            width: 3360,
+            height: 800,
+          },
+          small: {
+            width: 1680,
+            height: 400,
+          },
+          tiny_webp: {
+            width: 840,
+            height: 200,
+          },
+          large_webp: {
+            width: 3360,
+            height: 800,
+          },
+          small_webp: {
+            width: 1680,
+            height: 400,
+          },
+        },
+      },
+    },
+    chapterCount: null,
+    volumeCount: 0,
+    serialization: 'Young Animal',
+    mangaType: 'manga',
+  },
+  relationships: {
+    genres: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/genres',
+        related: 'https://kitsu.io/api/edge/manga/8/genres',
+      },
+    },
+    categories: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/categories',
+        related: 'https://kitsu.io/api/edge/manga/8/categories',
+      },
+    },
+    castings: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/castings',
+        related: 'https://kitsu.io/api/edge/manga/8/castings',
+      },
+    },
+    installments: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/installments',
+        related: 'https://kitsu.io/api/edge/manga/8/installments',
+      },
+    },
+    mappings: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/mappings',
+        related: 'https://kitsu.io/api/edge/manga/8/mappings',
+      },
+    },
+    reviews: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/reviews',
+        related: 'https://kitsu.io/api/edge/manga/8/reviews',
+      },
+    },
+    mediaRelationships: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/media-relationships',
+        related: 'https://kitsu.io/api/edge/manga/8/media-relationships',
+      },
+    },
+    characters: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/characters',
+        related: 'https://kitsu.io/api/edge/manga/8/characters',
+      },
+    },
+    staff: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/staff',
+        related: 'https://kitsu.io/api/edge/manga/8/staff',
+      },
+    },
+    productions: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/productions',
+        related: 'https://kitsu.io/api/edge/manga/8/productions',
+      },
+    },
+    quotes: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/quotes',
+        related: 'https://kitsu.io/api/edge/manga/8/quotes',
+      },
+    },
+    chapters: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/chapters',
+        related: 'https://kitsu.io/api/edge/manga/8/chapters',
+      },
+    },
+    mangaCharacters: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/manga-characters',
+        related: 'https://kitsu.io/api/edge/manga/8/manga-characters',
+      },
+    },
+    mangaStaff: {
+      links: {
+        self: 'https://kitsu.io/api/edge/manga/8/relationships/manga-staff',
+        related: 'https://kitsu.io/api/edge/manga/8/manga-staff',
       },
     },
   },
@@ -1282,228 +1504,7 @@ export const mangaList: Manga[] = [
       },
     },
   },
-  {
-    id: '8',
-    type: 'manga',
-    links: {
-      self: 'https://kitsu.io/api/edge/manga/8',
-    },
-    attributes: {
-      createdAt: '2013-12-18T13:48:25.461Z',
-      updatedAt: '2023-03-15T16:38:03.087Z',
-      slug: 'berserk',
-      synopsis:
-        "His name is Guts, the Black Swordsman, a feared warrior spoken of only in whispers. Bearer of a gigantic sword, an iron hand, and the scars of countless battles and tortures, his flesh is also indelibly marked with The Brand, an unholy symbol that draws the forces of darkness to him and dooms him as their sacrifice. But Guts won't take his fate lying down; he'll cut a crimson swath of carnage through the ranks of the damned—and anyone else foolish enough to oppose him! Accompanied by Puck the Elf, more an annoyance than a companion, Guts relentlessly follows a dark, bloodstained path that leads only to death...or vengeance.\n\n(Source: Dark Horse)\n\nNotes:\n- Volumes 1-5 contain the 16 prequel chapters 0A - 0P.\n- Chapter 83 was omitted from Volume 13 due to the author’s request.\n- Volume 14 includes “Berserk: The Prototype”.\n- Due to the author's passing, starting from Chapter 365, the manga is illustrated by Studio Gaga (Miura's assistants) and supervised by Kouji Mori (a close friend of Miura's).",
-      description:
-        "His name is Guts, the Black Swordsman, a feared warrior spoken of only in whispers. Bearer of a gigantic sword, an iron hand, and the scars of countless battles and tortures, his flesh is also indelibly marked with The Brand, an unholy symbol that draws the forces of darkness to him and dooms him as their sacrifice. But Guts won't take his fate lying down; he'll cut a crimson swath of carnage through the ranks of the damned—and anyone else foolish enough to oppose him! Accompanied by Puck the Elf, more an annoyance than a companion, Guts relentlessly follows a dark, bloodstained path that leads only to death...or vengeance.\n\n(Source: Dark Horse)\n\nNotes:\n- Volumes 1-5 contain the 16 prequel chapters 0A - 0P.\n- Chapter 83 was omitted from Volume 13 due to the author’s request.\n- Volume 14 includes “Berserk: The Prototype”.\n- Due to the author's passing, starting from Chapter 365, the manga is illustrated by Studio Gaga (Miura's assistants) and supervised by Kouji Mori (a close friend of Miura's).",
-      coverImageTopOffset: 200,
-      titles: {
-        en: 'Berserk',
-        en_jp: 'Berserk',
-        en_us: 'Berserk',
-        ja_jp: 'ベルセルク',
-      },
-      canonicalTitle: 'Berserk',
-      abbreviatedTitles: ['Berserk: The Prototype'],
-      averageRating: '84.2',
-      ratingFrequencies: {
-        '2': '1573',
-        '3': '22',
-        '4': '48',
-        '5': '25',
-        '6': '40',
-        '7': '11',
-        '8': '1042',
-        '9': '11',
-        '10': '86',
-        '11': '26',
-        '12': '184',
-        '13': '34',
-        '14': '1725',
-        '15': '73',
-        '16': '1144',
-        '17': '231',
-        '18': '2166',
-        '19': '395',
-        '20': '12585',
-      },
-      userCount: 29647,
-      favoritesCount: 2755,
-      startDate: '1989-08-25',
-      endDate: null,
-      nextRelease: null,
-      popularityRank: 20,
-      ratingRank: 23,
-      ageRating: 'R',
-      ageRatingGuide: 'Horror',
-      subtype: 'manga',
-      status: 'current',
-      tba: null,
-      posterImage: {
-        tiny: 'https://media.kitsu.io/manga/8/poster_image/tiny-ad1df8a063d11baf9fda08160deffc00.jpeg',
-        large:
-          'https://media.kitsu.io/manga/8/poster_image/large-f598ed525107bcb69ebda5bf36c6910d.jpeg',
-        small:
-          'https://media.kitsu.io/manga/8/poster_image/small-bdf7be96b4337627856b36e0be0241fb.jpeg',
-        medium:
-          'https://media.kitsu.io/manga/8/poster_image/medium-8edd6ddb0c6ec34a54521487ee81fb02.jpeg',
-        original:
-          'https://media.kitsu.io/manga/8/poster_image/67d602c20d1bf0eeb43e1a363c59ed5b.jpg',
-        meta: {
-          dimensions: {
-            tiny: {
-              width: 110,
-              height: 156,
-            },
-            large: {
-              width: 550,
-              height: 780,
-            },
-            small: {
-              width: 284,
-              height: 402,
-            },
-            medium: {
-              width: 390,
-              height: 554,
-            },
-          },
-        },
-      },
-      coverImage: {
-        tiny: 'https://media.kitsu.io/manga/8/cover_image/tiny-a61e4ae3c11698a65c0ecdd6cd3e86bd.gif',
-        large:
-          'https://media.kitsu.io/manga/8/cover_image/large-d976a1baf3051d321608d4ebb7da4220.gif',
-        small:
-          'https://media.kitsu.io/manga/8/cover_image/small-dd96d5ac1412ccabb1bcca3fe89747f5.gif',
-        tiny_webp:
-          'https://media.kitsu.io/manga/8/cover_image/tiny_webp-90fec06d293be542b08f362b457bce04.webp',
-        large_webp:
-          'https://media.kitsu.io/manga/8/cover_image/large_webp-e735c50a70351a02998742aa8f1424a6.webp',
-        small_webp:
-          'https://media.kitsu.io/manga/8/cover_image/small_webp-645e5266280fa6c4032f54823eb6413a.webp',
-        original: 'https://media.kitsu.io/manga/cover_images/8/original.jpg',
-        meta: {
-          dimensions: {
-            tiny: {
-              width: 840,
-              height: 200,
-            },
-            large: {
-              width: 3360,
-              height: 800,
-            },
-            small: {
-              width: 1680,
-              height: 400,
-            },
-            tiny_webp: {
-              width: 840,
-              height: 200,
-            },
-            large_webp: {
-              width: 3360,
-              height: 800,
-            },
-            small_webp: {
-              width: 1680,
-              height: 400,
-            },
-          },
-        },
-      },
-      chapterCount: null,
-      volumeCount: 0,
-      serialization: 'Young Animal',
-      mangaType: 'manga',
-    },
-    relationships: {
-      genres: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/genres',
-          related: 'https://kitsu.io/api/edge/manga/8/genres',
-        },
-      },
-      categories: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/categories',
-          related: 'https://kitsu.io/api/edge/manga/8/categories',
-        },
-      },
-      castings: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/castings',
-          related: 'https://kitsu.io/api/edge/manga/8/castings',
-        },
-      },
-      installments: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/installments',
-          related: 'https://kitsu.io/api/edge/manga/8/installments',
-        },
-      },
-      mappings: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/mappings',
-          related: 'https://kitsu.io/api/edge/manga/8/mappings',
-        },
-      },
-      reviews: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/reviews',
-          related: 'https://kitsu.io/api/edge/manga/8/reviews',
-        },
-      },
-      mediaRelationships: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/media-relationships',
-          related: 'https://kitsu.io/api/edge/manga/8/media-relationships',
-        },
-      },
-      characters: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/characters',
-          related: 'https://kitsu.io/api/edge/manga/8/characters',
-        },
-      },
-      staff: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/staff',
-          related: 'https://kitsu.io/api/edge/manga/8/staff',
-        },
-      },
-      productions: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/productions',
-          related: 'https://kitsu.io/api/edge/manga/8/productions',
-        },
-      },
-      quotes: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/quotes',
-          related: 'https://kitsu.io/api/edge/manga/8/quotes',
-        },
-      },
-      chapters: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/chapters',
-          related: 'https://kitsu.io/api/edge/manga/8/chapters',
-        },
-      },
-      mangaCharacters: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/manga-characters',
-          related: 'https://kitsu.io/api/edge/manga/8/manga-characters',
-        },
-      },
-      mangaStaff: {
-        links: {
-          self: 'https://kitsu.io/api/edge/manga/8/relationships/manga-staff',
-          related: 'https://kitsu.io/api/edge/manga/8/manga-staff',
-        },
-      },
-    },
-  },
+  apiTestMangaItem,
   {
     id: '9',
     type: 'manga',
@@ -2252,6 +2253,577 @@ export const mangaList: Manga[] = [
           related: 'https://kitsu.io/api/edge/manga/14/manga-staff',
         },
       },
+    },
+  },
+];
+
+export const categoriesList: Category[] = [
+  {
+    id: '46',
+    type: 'categories',
+    links: {
+      self: 'https://kitsu.io/api/edge/categories/46',
+    },
+    attributes: {
+      createdAt: '2017-05-31T06:38:46.923Z',
+      updatedAt: '2021-10-02T01:30:58.534Z',
+      title: 'Swordplay',
+      description: 'The act or art of using a sword or similar weapon skillfully.',
+      totalMediaCount: 507,
+      slug: 'swordplay',
+      nsfw: false,
+      childCount: 1,
+    },
+    relationships: {
+      parent: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/46/relationships/parent',
+          related: 'https://kitsu.io/api/edge/categories/46/parent',
+        },
+      },
+      anime: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/46/relationships/anime',
+          related: 'https://kitsu.io/api/edge/categories/46/anime',
+        },
+      },
+      drama: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/46/relationships/drama',
+          related: 'https://kitsu.io/api/edge/categories/46/drama',
+        },
+      },
+      manga: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/46/relationships/manga',
+          related: 'https://kitsu.io/api/edge/categories/46/manga',
+        },
+      },
+    },
+  },
+  {
+    id: '49',
+    type: 'categories',
+    links: {
+      self: 'https://kitsu.io/api/edge/categories/49',
+    },
+    attributes: {
+      createdAt: '2017-05-31T06:38:47.017Z',
+      updatedAt: '2021-10-02T01:31:00.191Z',
+      title: 'Past',
+      description:
+        'Anime that takes place in the past or clearly seems to take place in the past in case of an alternative universe. This category should almost always go together with one of its sub-categories, because the past can either be a depiction of a historical event(s) or not, in which case it would be alternative past.',
+      totalMediaCount: 618,
+      slug: 'past',
+      nsfw: false,
+      childCount: 2,
+    },
+    relationships: {
+      parent: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/49/relationships/parent',
+          related: 'https://kitsu.io/api/edge/categories/49/parent',
+        },
+      },
+      anime: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/49/relationships/anime',
+          related: 'https://kitsu.io/api/edge/categories/49/anime',
+        },
+      },
+      drama: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/49/relationships/drama',
+          related: 'https://kitsu.io/api/edge/categories/49/drama',
+        },
+      },
+      manga: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/49/relationships/manga',
+          related: 'https://kitsu.io/api/edge/categories/49/manga',
+        },
+      },
+    },
+  },
+  {
+    id: '52',
+    type: 'categories',
+    links: {
+      self: 'https://kitsu.io/api/edge/categories/52',
+    },
+    attributes: {
+      createdAt: '2017-05-31T06:38:47.099Z',
+      updatedAt: '2021-10-02T01:31:00.535Z',
+      title: 'Fantasy World',
+      description:
+        'A fantasy world is a type of imaginary world, part of a fictional universe. Typical worlds involve, but are not limited to magic or magical abilities and a medieval theme. Some examples include: a parallel world tenuously connected to Earth via magical portals or items; a fictional Earth-like planet in the remote past or future; or an entirely independent world set in another universe. Many fantasy worlds draw heavily on real world history, geography and sociology, and also on folklore.',
+      totalMediaCount: 1429,
+      slug: 'fantasy-world',
+      nsfw: false,
+      childCount: 1,
+    },
+    relationships: {
+      parent: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/52/relationships/parent',
+          related: 'https://kitsu.io/api/edge/categories/52/parent',
+        },
+      },
+      anime: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/52/relationships/anime',
+          related: 'https://kitsu.io/api/edge/categories/52/anime',
+        },
+      },
+      drama: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/52/relationships/drama',
+          related: 'https://kitsu.io/api/edge/categories/52/drama',
+        },
+      },
+      manga: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/52/relationships/manga',
+          related: 'https://kitsu.io/api/edge/categories/52/manga',
+        },
+      },
+    },
+  },
+  {
+    id: '61',
+    type: 'categories',
+    links: {
+      self: 'https://kitsu.io/api/edge/categories/61',
+    },
+    attributes: {
+      createdAt: '2017-05-31T06:38:49.733Z',
+      updatedAt: '2021-10-02T01:31:00.183Z',
+      title: 'Alternative Past',
+      description:
+        "An anime that takes place in an alternative past is an anime that clearly does not belong to the future or the present, and isn't tied particularly closely to our history, or has ties to our history but only as a premise: there are too many things that don't make sense for the time-period. In some cases there is futuristic technology present, but the overall setting still feels that of the past. However the setting must still take place on Earth, since we can not know if the history of a fantasy world is an alternate one or not.",
+      totalMediaCount: 155,
+      slug: 'alternative-past',
+      nsfw: false,
+      childCount: 0,
+    },
+    relationships: {
+      parent: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/61/relationships/parent',
+          related: 'https://kitsu.io/api/edge/categories/61/parent',
+        },
+      },
+      anime: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/61/relationships/anime',
+          related: 'https://kitsu.io/api/edge/categories/61/anime',
+        },
+      },
+      drama: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/61/relationships/drama',
+          related: 'https://kitsu.io/api/edge/categories/61/drama',
+        },
+      },
+      manga: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/61/relationships/manga',
+          related: 'https://kitsu.io/api/edge/categories/61/manga',
+        },
+      },
+    },
+  },
+  {
+    id: '67',
+    type: 'categories',
+    links: {
+      self: 'https://kitsu.io/api/edge/categories/67',
+    },
+    attributes: {
+      createdAt: '2017-05-31T06:38:49.899Z',
+      updatedAt: '2021-10-02T01:30:59.073Z',
+      title: 'Demon',
+      description:
+        'In Western lore, demons are often described as minions from Hell, generally known to attack humans and feast on their flesh or possess the bodies of those with weak souls. In Eastern lore, on the other hand, they are generally supernatural, often but not always malevolent beings who can be more mischievous than actually evil, or simply supernatural spirits of no specific alignment.',
+      totalMediaCount: 1720,
+      slug: 'demon',
+      nsfw: false,
+      childCount: 0,
+    },
+    relationships: {
+      parent: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/67/relationships/parent',
+          related: 'https://kitsu.io/api/edge/categories/67/parent',
+        },
+      },
+      anime: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/67/relationships/anime',
+          related: 'https://kitsu.io/api/edge/categories/67/anime',
+        },
+      },
+      drama: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/67/relationships/drama',
+          related: 'https://kitsu.io/api/edge/categories/67/drama',
+        },
+      },
+      manga: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/67/relationships/manga',
+          related: 'https://kitsu.io/api/edge/categories/67/manga',
+        },
+      },
+    },
+  },
+  {
+    id: '69',
+    type: 'categories',
+    links: {
+      self: 'https://kitsu.io/api/edge/categories/69',
+    },
+    attributes: {
+      createdAt: '2017-05-31T06:38:49.954Z',
+      updatedAt: '2021-10-02T01:30:59.097Z',
+      title: 'Contemporary Fantasy',
+      description:
+        'Contemporary fantasy, also known as modern fantasy or indigenous fantasy, is a sub-genre of fantasy, set in the present day. It is perhaps most popular for its sub-genre, urban fantasy.These terms are used to describe stories set in the putative real world (often referred to as consensus reality) in contemporary times, in which magic and magical creatures exist, either living in the interstices of our world or leaking over from alternate worlds. It thus has much in common with, and sometimes overlaps with secret history; a work of fantasy in which the magic could not remain secret or does not have any known relationship to known history would not fit into this subgenre. Occasionally certain contemporary fantasy novels will make reference to pop culture.Novels in which modern characters travel into alternate worlds, and all the magical action takes place there (except for the portal required to transport them), are not considered contemporary fantasy. Thus, C.S. Lewis\'s The Lion, the Witch and the Wardrobe, where all fantasy events take place in the land of Narnia which is reached via a magic wardrobe, would not count as contemporary fantasy; on the other hand, the part of The Magician\'s Nephew, where the Empress Jadis gets to London, tries to take over the Earth and clashes with police and a crowd of cockneys, would qualify as such.Contemporary fantasy is also to be distinguished from horror fiction, which also often has contemporary settings. When encountering magical events and creatures, the protagonist of a horror novel is horrified, while the protagonist of a fantasy novel (contemporary or otherwise) is filled with a sense of joy and wonder. Horrifying events may happen, but the fundamental distinction is vital.In his preface to That Hideous Strength, one of the earlier works falling within this sub-genre, C.S. Lewis explained why, when writing a tale about "magicians, devils, pantomime animals and planetary angels", he chose to start it with a detailed depiction of narrow-minded academic politics at a provincial English university and the schemes of crooked real estate developers: "I am following the traditional fairy-tale. We do not always notice its method, because the cottages, castles, woodcutters and petty kings with which a fairy tale opens have become for us as remote as the witches and ogres to which it proceeds. But they were not remote at all to the men who first made and enjoyed the tales". The same is true for many of the later works in the genre, which often begin with a seemingly normal scene of modern daily life to then disclose supernatural and magical beings and events hidden behind the scenes.Source: wiki',
+      totalMediaCount: 791,
+      slug: 'contemporary-fantasy',
+      nsfw: false,
+      childCount: 0,
+    },
+    relationships: {
+      parent: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/69/relationships/parent',
+          related: 'https://kitsu.io/api/edge/categories/69/parent',
+        },
+      },
+      anime: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/69/relationships/anime',
+          related: 'https://kitsu.io/api/edge/categories/69/anime',
+        },
+      },
+      drama: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/69/relationships/drama',
+          related: 'https://kitsu.io/api/edge/categories/69/drama',
+        },
+      },
+      manga: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/69/relationships/manga',
+          related: 'https://kitsu.io/api/edge/categories/69/manga',
+        },
+      },
+    },
+  },
+  {
+    id: '70',
+    type: 'categories',
+    links: {
+      self: 'https://kitsu.io/api/edge/categories/70',
+    },
+    attributes: {
+      createdAt: '2017-05-31T06:38:49.979Z',
+      updatedAt: '2021-10-02T01:30:59.110Z',
+      title: 'Dark Fantasy',
+      description:
+        'Focus set on darker themes in a fantasy setting, sometimes leaning towards horror elements. Bleak and pessimistic tones often dominate. Dark supernatural beings like vampires may play a significant role.',
+      totalMediaCount: 165,
+      slug: 'dark-fantasy',
+      nsfw: false,
+      childCount: 0,
+    },
+    relationships: {
+      parent: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/70/relationships/parent',
+          related: 'https://kitsu.io/api/edge/categories/70/parent',
+        },
+      },
+      anime: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/70/relationships/anime',
+          related: 'https://kitsu.io/api/edge/categories/70/anime',
+        },
+      },
+      drama: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/70/relationships/drama',
+          related: 'https://kitsu.io/api/edge/categories/70/drama',
+        },
+      },
+      manga: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/70/relationships/manga',
+          related: 'https://kitsu.io/api/edge/categories/70/manga',
+        },
+      },
+    },
+  },
+  {
+    id: '108',
+    type: 'categories',
+    links: {
+      self: 'https://kitsu.io/api/edge/categories/108',
+    },
+    attributes: {
+      createdAt: '2017-05-31T06:39:04.202Z',
+      updatedAt: '2021-10-02T01:30:58.265Z',
+      title: 'Violence',
+      description:
+        "Physical force against self or other, compelling action against one's will on pain of being hurt.",
+      totalMediaCount: 1246,
+      slug: 'violence',
+      nsfw: false,
+      childCount: 0,
+    },
+    relationships: {
+      parent: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/108/relationships/parent',
+          related: 'https://kitsu.io/api/edge/categories/108/parent',
+        },
+      },
+      anime: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/108/relationships/anime',
+          related: 'https://kitsu.io/api/edge/categories/108/anime',
+        },
+      },
+      drama: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/108/relationships/drama',
+          related: 'https://kitsu.io/api/edge/categories/108/drama',
+        },
+      },
+      manga: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/108/relationships/manga',
+          related: 'https://kitsu.io/api/edge/categories/108/manga',
+        },
+      },
+    },
+  },
+  {
+    id: '118',
+    type: 'categories',
+    links: {
+      self: 'https://kitsu.io/api/edge/categories/118',
+    },
+    attributes: {
+      createdAt: '2017-05-31T06:39:08.214Z',
+      updatedAt: '2021-10-02T01:31:02.269Z',
+      title: 'Feudal Warfare',
+      description:
+        "Feudal Warfare is the warfare of the Middle Ages and therefore the setting must take place in a time line similar to that of Middle Ages or its Asian/American counterparts, or in a fantasy world. Generally it can be described the same way as the Military category, just that the weapons used are swords, spears, bows, catapults, cannons and other weapons used in the Middle Ages.\n\nNote: Just because the anime contains a guy or a couple of guys with swords wondering about, doesn't make it applicable for this category, unless there are larger military organizations/groups involved in armed conflict with each other, you might not want to add this genre.",
+      totalMediaCount: 48,
+      slug: 'feudal-warfare',
+      nsfw: false,
+      childCount: 0,
+    },
+    relationships: {
+      parent: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/118/relationships/parent',
+          related: 'https://kitsu.io/api/edge/categories/118/parent',
+        },
+      },
+      anime: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/118/relationships/anime',
+          related: 'https://kitsu.io/api/edge/categories/118/anime',
+        },
+      },
+      drama: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/118/relationships/drama',
+          related: 'https://kitsu.io/api/edge/categories/118/drama',
+        },
+      },
+      manga: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/118/relationships/manga',
+          related: 'https://kitsu.io/api/edge/categories/118/manga',
+        },
+      },
+    },
+  },
+  {
+    id: '128',
+    type: 'categories',
+    links: {
+      self: 'https://kitsu.io/api/edge/categories/128',
+    },
+    attributes: {
+      createdAt: '2017-05-31T06:39:08.523Z',
+      updatedAt: '2021-10-02T01:30:58.291Z',
+      title: 'Plot Continuity',
+      description:
+        'Consistency of the characteristics of persons, plot, objects, places and events seen by the viewer.\n\nA single linear focused plot is highly continuous.\n\nA truly random plot is highly discontinuous.',
+      totalMediaCount: 1028,
+      slug: 'plot-continuity',
+      nsfw: false,
+      childCount: 0,
+    },
+    relationships: {
+      parent: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/128/relationships/parent',
+          related: 'https://kitsu.io/api/edge/categories/128/parent',
+        },
+      },
+      anime: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/128/relationships/anime',
+          related: 'https://kitsu.io/api/edge/categories/128/anime',
+        },
+      },
+      drama: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/128/relationships/drama',
+          related: 'https://kitsu.io/api/edge/categories/128/drama',
+        },
+      },
+      manga: {
+        links: {
+          self: 'https://kitsu.io/api/edge/categories/128/relationships/manga',
+          related: 'https://kitsu.io/api/edge/categories/128/manga',
+        },
+      },
+    },
+  },
+];
+
+export const genresList: Genre[] = [
+  {
+    id: '1',
+    type: 'genres',
+    links: {
+      self: 'https://kitsu.io/api/edge/genres/1',
+    },
+    attributes: {
+      createdAt: '2013-02-20T16:00:15.623Z',
+      updatedAt: '2016-07-17T19:30:56.164Z',
+      name: 'Action',
+      slug: 'action',
+      description: '',
+    },
+  },
+  {
+    id: '2',
+    type: 'genres',
+    links: {
+      self: 'https://kitsu.io/api/edge/genres/2',
+    },
+    attributes: {
+      createdAt: '2013-02-20T16:00:15.657Z',
+      updatedAt: '2017-04-22T16:11:16.077Z',
+      name: 'Adventure',
+      slug: 'adventure',
+      description: '',
+    },
+  },
+  {
+    id: '4',
+    type: 'genres',
+    links: {
+      self: 'https://kitsu.io/api/edge/genres/4',
+    },
+    attributes: {
+      createdAt: '2013-02-20T16:00:15.686Z',
+      updatedAt: '2016-06-10T11:23:00.431Z',
+      name: 'Drama',
+      slug: 'drama',
+      description: '',
+    },
+  },
+  {
+    id: '9',
+    type: 'genres',
+    links: {
+      self: 'https://kitsu.io/api/edge/genres/9',
+    },
+    attributes: {
+      createdAt: '2013-02-20T16:00:18.777Z',
+      updatedAt: '2013-02-20T16:00:18.777Z',
+      name: 'Supernatural',
+      slug: 'supernatural',
+      description: null,
+    },
+  },
+  {
+    id: '11',
+    type: 'genres',
+    links: {
+      self: 'https://kitsu.io/api/edge/genres/11',
+    },
+    attributes: {
+      createdAt: '2013-02-20T16:00:19.973Z',
+      updatedAt: '2016-01-10T12:27:18.443Z',
+      name: 'Fantasy',
+      slug: 'fantasy',
+      description: '',
+    },
+  },
+  {
+    id: '19',
+    type: 'genres',
+    links: {
+      self: 'https://kitsu.io/api/edge/genres/19',
+    },
+    attributes: {
+      createdAt: '2013-02-20T16:00:24.648Z',
+      updatedAt: '2016-01-24T15:10:28.426Z',
+      name: 'Horror',
+      slug: 'horror',
+      description: '',
+    },
+  },
+  {
+    id: '20',
+    type: 'genres',
+    links: {
+      self: 'https://kitsu.io/api/edge/genres/20',
+    },
+    attributes: {
+      createdAt: '2013-02-20T16:00:24.673Z',
+      updatedAt: '2013-02-20T16:00:24.673Z',
+      name: 'Psychological',
+      slug: 'psychological',
+      description: null,
+    },
+  },
+  {
+    id: '28',
+    type: 'genres',
+    links: {
+      self: 'https://kitsu.io/api/edge/genres/28',
+    },
+    attributes: {
+      createdAt: '2013-02-20T16:00:34.141Z',
+      updatedAt: '2013-02-20T16:00:34.141Z',
+      name: 'Military',
+      slug: 'military',
+      description: null,
+    },
+  },
+  {
+    id: '31',
+    type: 'genres',
+    links: {
+      self: 'https://kitsu.io/api/edge/genres/31',
+    },
+    attributes: {
+      createdAt: '2013-02-20T16:00:37.689Z',
+      updatedAt: '2013-02-20T16:00:37.689Z',
+      name: 'Demons',
+      slug: 'demons',
+      description: null,
     },
   },
 ];

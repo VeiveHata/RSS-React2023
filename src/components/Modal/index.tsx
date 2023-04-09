@@ -10,7 +10,7 @@ type ModalProps = PropsWithChildren & {
 export const Modal: React.FC<ModalProps> = ({ children, visible, onClose }) => {
   return (
     <ConditionalRender condition={visible}>
-      <div className="modal-wrapper">
+      <div className="modal-wrapper" data-testid="modal">
         <div className="modal">
           <button className="close-modal" onClick={onClose}>
             X

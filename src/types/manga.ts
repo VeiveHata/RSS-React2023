@@ -91,6 +91,25 @@ export type MangaAttributes = {
   mangaType: string;
 };
 
+type RelationshipData = { links: Links };
+
+export type MangaRelationships = {
+  genres: RelationshipData;
+  categories: RelationshipData;
+  castings: RelationshipData;
+  installments: RelationshipData;
+  mappings: RelationshipData;
+  reviews: RelationshipData;
+  mediaRelationships: RelationshipData;
+  characters: RelationshipData;
+  staff: RelationshipData;
+  productions: RelationshipData;
+  quotes: RelationshipData;
+  chapters: RelationshipData;
+  mangaCharacters: RelationshipData;
+  mangaStaff: RelationshipData;
+};
+
 export interface Manga {
   id: string;
   type: string;
@@ -98,50 +117,7 @@ export interface Manga {
     self: string;
   };
   attributes: MangaAttributes;
-  relationships: {
-    genres: {
-      links: Links;
-    };
-    categories: {
-      links: Links;
-    };
-    castings: {
-      links: Links;
-    };
-    installments: {
-      links: Links;
-    };
-    mappings: {
-      links: Links;
-    };
-    reviews: {
-      links: Links;
-    };
-    mediaRelationships: {
-      links: Links;
-    };
-    characters: {
-      links: Links;
-    };
-    staff: {
-      links: Links;
-    };
-    productions: {
-      links: Links;
-    };
-    quotes: {
-      links: Links;
-    };
-    chapters: {
-      links: Links;
-    };
-    mangaCharacters: {
-      links: Links;
-    };
-    mangaStaff: {
-      links: Links;
-    };
-  };
+  relationships: MangaRelationships;
 }
 
 type RelationshipType = 'genres';
@@ -156,7 +132,7 @@ export interface Genre {
     updatedAt: string;
     name: string;
     slug: string;
-    description: string;
+    description: Nullable<string>;
   };
 }
 
