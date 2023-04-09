@@ -21,6 +21,7 @@ type CardProps = {
   chapterCount?: Nullable<number>;
   volumeCount?: Nullable<number>;
   onClick?: () => void;
+  id: string;
 };
 
 export const Card: React.FC<CardProps> = ({
@@ -35,9 +36,10 @@ export const Card: React.FC<CardProps> = ({
   chapterCount = null,
   volumeCount = null,
   onClick,
+  id,
 }) => {
   return (
-    <div className="card" onClick={onClick}>
+    <div className="card" onClick={onClick} data-testid={`card-${id}`}>
       <div className="poster">
         <StatusInfo status={status} rating={averageRating} />
         <div className="card-image">

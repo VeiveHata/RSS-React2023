@@ -23,6 +23,7 @@ export const CardsList: React.FC<{ mangaList: Manga[]; onCardSelect?: (id: strin
             volumeCount={attributes.volumeCount}
             key={manga.id}
             onClick={() => onCardSelect && onCardSelect(manga.id)}
+            id={manga.id}
           />
         );
       })}

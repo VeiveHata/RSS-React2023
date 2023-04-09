@@ -46,6 +46,7 @@ const Forms: React.FC = () => {
             description={card.description}
             status={card.status}
             key={index}
+            id={`${index}`}
           />
         ))}
       </div>

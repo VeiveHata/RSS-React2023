@@ -3,7 +3,7 @@ import './styles.css';
 
 export const Loading: React.FC<{ type?: 'image' | 'text' }> = ({ type = 'image' }) => {
   return (
-    <div className="loading">
+    <div className="loading" data-testid="loading">
       {type === 'text' && <p aria-label="Loading">Loading</p>}
       {type === 'image' && <div className="loader-image"></div>}
     </div>

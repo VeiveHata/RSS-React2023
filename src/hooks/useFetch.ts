@@ -1,24 +1,10 @@
+import { mangaUrl } from 'consts/api';
 import { useCallback, useEffect, useState } from 'react';
-
-const apiUrl = 'https://kitsu.io/api/edge';
+import { ResponseStructure } from 'types/api';
 
 const getErrorMessage = (error: unknown) => {
   if (error instanceof Error) return error.message;
   return String(error);
-};
-
-type Pagination = {
-  first: string;
-  last: string;
-  next: string;
-};
-
-type ResponseStructure<T> = {
-  data: T;
-  meta: {
-    count: number;
-  };
-  links: Pagination;
 };
 
 export const useFetch = <T>() => {
@@ -76,7 +62,7 @@ export const useGetMangaList = <T>({ defaultPagination = 10 }: { defaultPaginati
         'page[limit]': pagination,
         'page[offset]': offset,
       });
-      return fetchData(`${apiUrl}/manga?${listOptions}`);
+      return fetchData(`${mangaUrl}?${listOptions}`);
     },
     [defaultPagination, fetchData]
   );
@@ -94,7 +80,7 @@ export const useGetMangaItem = <T>({ id }: { id: string }) => {
   const { fetchData, loading, error, response } = useFetch<T>();
 
   useEffect(() => {
-    fetchData(`${apiUrl}/manga/${id}`);
+    fetchData(`${mangaUrl}/${id}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
