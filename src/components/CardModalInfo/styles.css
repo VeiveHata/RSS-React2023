@@ -1,0 +1,28 @@
+.card-modal-content {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.card-modal-info {
+  padding: 1rem;
+}
+
+.card-modal-cover-image {
+  width: 100%;
+  height: 40%;
+}
+
+.card-modal-description {
+  margin: 1rem 0;
+  color: var(--decorate-color);
+}
+
+.info-section {
+  margin: 1rem 0;
+}
+
+.info-section-info {
+  font-size: 0.7rem;
+  color: var(--decorate-color);
+}

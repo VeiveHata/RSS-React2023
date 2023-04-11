@@ -6,7 +6,8 @@ import { getPoster } from 'utils/card';
 import { StatusInfo } from './StatusInfo';
 import './styles.css';
 import { Title } from './Title';
-import { VolumeInfo } from './VolumeInfo';
+import { VolumeInfo } from '../VolumeInfo';
+import { MediaImage } from 'components/Media';
 
 type CardProps = {
   averageRating?: Nullable<string>;
@@ -19,6 +20,8 @@ type CardProps = {
   serialization?: Nullable<string>;
   chapterCount?: Nullable<number>;
   volumeCount?: Nullable<number>;
+  onClick?: () => void;
+  id: string;
 };
 
 export const Card: React.FC<CardProps> = ({
@@ -32,16 +35,22 @@ export const Card: React.FC<CardProps> = ({
   serialization,
   chapterCount = null,
   volumeCount = null,
+  onClick,
+  id,
 }) => {
   return (
-    <div className="card">
+    <div className="card" onClick={onClick} data-testid={`card-${id}`}>
       <div className="poster">
         <StatusInfo status={status} rating={averageRating} />
-        <img className="card-image" src={getPoster(posterImage)} />
+        <div className="card-image">
+          <MediaImage src={getPoster(posterImage)} />
+        </div>
       </div>
       <div className="card-content">
         <Title titles={titles} canonicalTitle={canonicalTitle} />
-        <section className="description">{synopsis || description}</section>
+        <ConditionalRender condition={Boolean(synopsis || description)}>
+          <section className="description">{synopsis || description}</section>
+        </ConditionalRender>
         <section className="card-footer">
           <ConditionalRender condition={Boolean(serialization)}>
             <h5 data-testid="serialization" className="serialization">

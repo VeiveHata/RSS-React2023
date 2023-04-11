@@ -91,6 +91,25 @@ export type MangaAttributes = {
   mangaType: string;
 };
 
+type RelationshipData = { links: Links };
+
+export type MangaRelationships = {
+  genres: RelationshipData;
+  categories: RelationshipData;
+  castings: RelationshipData;
+  installments: RelationshipData;
+  mappings: RelationshipData;
+  reviews: RelationshipData;
+  mediaRelationships: RelationshipData;
+  characters: RelationshipData;
+  staff: RelationshipData;
+  productions: RelationshipData;
+  quotes: RelationshipData;
+  chapters: RelationshipData;
+  mangaCharacters: RelationshipData;
+  mangaStaff: RelationshipData;
+};
+
 export interface Manga {
   id: string;
   type: string;
@@ -98,47 +117,52 @@ export interface Manga {
     self: string;
   };
   attributes: MangaAttributes;
+  relationships: MangaRelationships;
+}
+
+type RelationshipType = 'genres';
+export interface Genre {
+  id: string;
+  type: RelationshipType;
+  links: {
+    self: string;
+  };
+  attributes: {
+    createdAt: string;
+    updatedAt: string;
+    name: string;
+    slug: string;
+    description: Nullable<string>;
+  };
+}
+
+export interface Category {
+  id: string;
+  type: string;
+  links: {
+    self: string;
+  };
+  attributes: {
+    createdAt: string;
+    updatedAt: string;
+    title: string;
+    description: string;
+    totalMediaCount: number;
+    slug: string;
+    nsfw: boolean;
+    childCount: number;
+  };
   relationships: {
-    genres: {
+    parent: {
       links: Links;
     };
-    categories: {
+    anime: {
       links: Links;
     };
-    castings: {
+    drama: {
       links: Links;
     };
-    installments: {
-      links: Links;
-    };
-    mappings: {
-      links: Links;
-    };
-    reviews: {
-      links: Links;
-    };
-    mediaRelationships: {
-      links: Links;
-    };
-    characters: {
-      links: Links;
-    };
-    staff: {
-      links: Links;
-    };
-    productions: {
-      links: Links;
-    };
-    quotes: {
-      links: Links;
-    };
-    chapters: {
-      links: Links;
-    };
-    mangaCharacters: {
-      links: Links;
-    };
-    mangaStaff: {
+    manga: {
       links: Links;
     };
   };

@@ -16,6 +16,10 @@ const router: RouteObject[] = [
     errorElement: <ErrorPage />,
     children: [
       {
+        index: true,
+        element: <Cards />,
+      },
+      {
         path: routesPath.library,
         element: <Cards />,
       },

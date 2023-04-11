@@ -1,36 +1,15 @@
 import { Button } from 'components/Button';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { getValueFromLS, setValueToLS } from 'utils/localStorage';
+import React, { ChangeEvent, useState } from 'react';
 import './styles.css';
 
 type SearchInputProps = {
   defaultValue?: string;
   onSearch: (value: string) => void;
   name?: string;
-  withSave?: boolean;
 };
 
-export const SearchInput: React.FC<SearchInputProps> = ({
-  defaultValue,
-  onSearch,
-  name,
-  withSave,
-}) => {
+export const SearchInput: React.FC<SearchInputProps> = ({ defaultValue, onSearch, name }) => {
   const [value, setValue] = useState<string>(defaultValue || '');
-
-  useEffect(() => {
-    if (withSave) {
-      const savedValue = getValueFromLS(name || 'input');
-      setValue(savedValue);
-    }
-
-    return () => {
-      if (withSave) {
-        setValueToLS(name || 'input', value);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const onSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);

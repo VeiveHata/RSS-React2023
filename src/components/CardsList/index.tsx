@@ -3,7 +3,10 @@ import React from 'react';
 import { Manga } from 'types/manga';
 import './styles.css';
 
-export const CardsList: React.FC<{ mangaList: Manga[] }> = ({ mangaList }) => {
+export const CardsList: React.FC<{ mangaList: Manga[]; onCardSelect?: (id: string) => void }> = ({
+  mangaList,
+  onCardSelect,
+}) => {
   return (
     <div className="cards-wrapper" data-testid="cardsList">
       {mangaList.map((manga) => {
@@ -15,12 +18,12 @@ export const CardsList: React.FC<{ mangaList: Manga[] }> = ({ mangaList }) => {
             posterImage={attributes.posterImage}
             canonicalTitle={attributes.canonicalTitle}
             titles={attributes.titles}
-            description={attributes.description}
-            synopsis={attributes.synopsis}
             serialization={attributes.serialization}
             chapterCount={attributes.chapterCount}
             volumeCount={attributes.volumeCount}
             key={manga.id}
+            onClick={() => onCardSelect && onCardSelect(manga.id)}
+            id={manga.id}
           />
         );
       })}
