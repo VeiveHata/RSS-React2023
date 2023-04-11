@@ -1,6 +1,7 @@
 import { mangaUrl } from 'consts/api';
 import { useCallback, useEffect, useState } from 'react';
 import { ResponseItemStructure, ResponseListStructure } from 'types/api';
+import { Manga } from 'types/manga';
 
 const getErrorMessage = (error: unknown) => {
   if (error instanceof Error) return error.message;
@@ -43,8 +44,8 @@ export const useFetch = <T>() => {
   };
 };
 
-export const useGetMangaList = <T>({ defaultPagination = 10 }: { defaultPagination?: number }) => {
-  const { fetchData, loading, error, response } = useFetch<ResponseListStructure<T>>();
+export const useGetMangaList = ({ defaultPagination = 10 }: { defaultPagination?: number }) => {
+  const { fetchData, loading, error, response } = useFetch<ResponseListStructure<Manga>>();
 
   const getList = useCallback(
     ({
