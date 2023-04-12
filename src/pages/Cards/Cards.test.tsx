@@ -4,15 +4,16 @@ import { describe, it, expect } from 'vitest';
 import Cards from './index';
 import { pagesData } from 'consts/router';
 import { apiTestMangaItem, mangaList } from 'mock/mangaMock';
+import { renderWithProviders } from '../../../tests/utils';
 
 describe('Cards page', () => {
   it('renders Cards page', () => {
-    const { getByTestId } = render(<Cards />);
+    const { getByTestId } = renderWithProviders(<Cards />);
     const pageComponent = getByTestId(pagesData.library.testId);
     expect(pageComponent).toBeInTheDocument();
   });
   it('fetches and display loading and cards on the page', async () => {
-    const { getByTestId } = render(<Cards />);
+    const { getByTestId } = renderWithProviders(<Cards />);
     const loadingComponent = getByTestId('loading');
     expect(loadingComponent).toBeInTheDocument();
 
@@ -25,7 +26,7 @@ describe('Cards page', () => {
 
 describe('Card selection', () => {
   it('fetch manga item info and open the modal', async () => {
-    const { getByTestId } = render(<Cards />);
+    const { getByTestId } = renderWithProviders(<Cards />);
 
     let testCard;
     await waitFor(() => {

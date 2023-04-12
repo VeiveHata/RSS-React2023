@@ -11,12 +11,14 @@ import { usePagination } from 'hooks/usePagination';
 import { Modal } from 'components/Modal';
 import { CardModalInfo } from 'components/CardModalInfo';
 import { Loading } from 'components/Loading';
-import { getValueFromLS, setValueToLS } from 'utils/localStorage';
+import { useAppDispatch, useAppSelector } from 'hooks/useDispatch';
+import { selectSearchValue, update } from 'reducers/search';
 
 const defaultPagination = 10;
 
 const Cards: React.FC = () => {
-  const [query, setQuery] = useState(getValueFromLS('cardsSearch'));
+  const searchValue = useAppSelector(selectSearchValue);
+  const dispatch = useAppDispatch();
   const [selectedCard, setSelectedCard] = useState('');
   const { getList, data, loading, error, total } = useGetMangaList({
     defaultPagination,
@@ -32,14 +34,14 @@ const Cards: React.FC = () => {
   });
 
   const getPage = (page: number) => {
-    onPageChange(page, (offset) => getList({ filter: query, offset: `${offset}` }));
+    onPageChange(page, (offset) => getList({ filter: searchValue, offset: `${offset}` }));
   };
 
   useEffect(() => {
-    getList({ filter: query, offset: '0' });
+    getList({ filter: searchValue, offset: '0' });
     onPageChange(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, [searchValue]);
 
   const onCardSelect = (id: string) => {
     setSelectedCard(id);
@@ -50,13 +52,12 @@ const Cards: React.FC = () => {
   };
 
   const onSearchChange = (value: string) => {
-    setQuery(value);
-    setValueToLS('cardsSearch', value);
+    dispatch(update(value));
   };
 
   return (
     <PageContent testId={pagesData.library.testId}>
-      <SearchInput onSearch={onSearchChange} name="cardsSearch" defaultValue={query} />
+      <SearchInput onSearch={onSearchChange} name="cardsSearch" defaultValue={searchValue} />
       {loading && <Loading />}
       <ConditionalRender condition={!loading && !!data && !error}>
         <CardsList mangaList={data} onCardSelect={onCardSelect} />

@@ -26,6 +26,8 @@ export default defineConfig({
       consts: path.resolve(__dirname, './src/consts'),
       mock: path.resolve(__dirname, './src/mock'),
       hooks: path.resolve(__dirname, './src/hooks'),
+      reducers: path.resolve(__dirname, './src/reducers'),
+      store: path.resolve(__dirname, './src/store'),
     },
   },
 });
