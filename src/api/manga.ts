@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { mangaUrl } from 'consts/api';
-import { ResponseListStructure } from 'types/api';
-import type { Manga } from 'types/manga';
+import { ResponseItemStructure, ResponseListStructure } from 'types/api';
+import type { Category, Genre, Manga } from 'types/manga';
 
 type MangaListProps = {
   pagination?: string;
@@ -26,7 +26,22 @@ export const mangaApi = createApi({
         };
       },
     }),
+    getMangaItem: builder.query<ResponseItemStructure['data'], string>({
+      query: (id: string) => `/${id}`,
+      transformResponse: (response: ResponseItemStructure) => response.data,
+    }),
+    getMangaGenres: builder.query<ResponseListStructure<Genre>, string>({
+      query: (id: string) => `/${id}/genres`,
+    }),
+    getMangaCategories: builder.query<ResponseListStructure<Category>, string>({
+      query: (id: string) => `/${id}/categories`,
+    }),
   }),
 });
 
-export const { useGetMangaListQuery } = mangaApi;
+export const {
+  useGetMangaListQuery,
+  useGetMangaItemQuery,
+  useGetMangaGenresQuery,
+  useGetMangaCategoriesQuery,
+} = mangaApi;
