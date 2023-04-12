@@ -1,9 +1,11 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 import { mangaApi } from 'api/manga';
 import searchReducer from 'reducers/search';
+import formReducer from 'reducers/form';
 
 const rootReducer = combineReducers({
   search: searchReducer,
+  form: formReducer,
   [mangaApi.reducerPath]: mangaApi.reducer,
 });
 
