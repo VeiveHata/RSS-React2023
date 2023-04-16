@@ -1,28 +1,36 @@
 import { useCallback, useMemo, useState } from 'react';
 
 type UsePaginationProps = {
-  totalCount: number;
   pagination: number;
   initialPage: number;
 };
 
-export const usePagination = ({ totalCount, pagination, initialPage }: UsePaginationProps) => {
+export const usePagination = ({ pagination, initialPage }: UsePaginationProps) => {
   const [page, setPage] = useState(initialPage);
+  const [offset, setOffset] = useState(initialPage);
 
   const onPageChange = useCallback(
-    (selectedPage: number, callback?: (offsetValue: number) => void) => {
+    (selectedPage: number) => {
       setPage(selectedPage);
       const offset = (selectedPage - 1) * pagination;
-      callback && callback(offset);
+      setOffset(offset);
+    },
+    [pagination]
+  );
+
+  const getTotalPagesCount = useCallback(
+    (totalCount: number) => {
+      return Math.ceil(totalCount / pagination);
     },
     [pagination]
   );
 
   return useMemo(() => {
     return {
-      total: Math.ceil(totalCount / pagination),
+      getTotalPagesCount: getTotalPagesCount,
       onPageChange,
       currentPage: page,
+      offset,
     };
-  }, [onPageChange, page, pagination, totalCount]);
+  }, [getTotalPagesCount, offset, onPageChange, page]);
 };

@@ -1,12 +1,12 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import App from './App';
 import { pagesData } from 'consts/router';
 import { describe } from 'vitest';
+import { renderWithProviders } from '../tests/utils';
 
 describe('main page', () => {
   it('renders without crashing', () => {
-    const { container } = render(<App />);
+    const { container } = renderWithProviders(<App />);
     expect(container.firstChild).toBeInTheDocument();
   });
 });
@@ -14,7 +14,7 @@ describe('main page', () => {
 describe('App', () => {
   const routeCheck = (route: string, testId: string) => {
     window.history.pushState({}, 'Test page', route);
-    const { getByTestId } = render(<App />);
+    const { getByTestId } = renderWithProviders(<App />);
 
     expect(getByTestId(testId)).toBeInTheDocument();
   };

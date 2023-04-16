@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './styles.css';
-import { useFetch, useGetMangaItem } from 'hooks/useFetch';
-import { Genre, Category } from 'types/manga';
 import { ConditionalRender } from 'components/ConditionalRender';
 import { getPoster } from 'utils/card';
 import { Title } from 'components/Card/Title';
@@ -10,43 +8,27 @@ import { InfoSection } from './InfoSection';
 import { VolumeInfo } from 'components/VolumeInfo';
 import { getStatusTitle } from 'utils/common';
 import { Loading } from 'components/Loading';
-import { ResponseListStructure } from 'types/api';
+import {
+  useGetMangaCategoriesQuery,
+  useGetMangaGenresQuery,
+  useGetMangaItemQuery,
+} from 'api/manga';
 
 type CardModalInfoProps = {
   id: string;
 };
 
 export const CardModalInfo: React.FC<CardModalInfoProps> = ({ id }) => {
-  const { data, loading } = useGetMangaItem({ id });
-  const {
-    fetchData: fetchGenres,
-    loading: genresLoading,
-    response: genres,
-  } = useFetch<ResponseListStructure<Genre>>();
-  const {
-    fetchData: fetchCategories,
-    loading: categoriesLoading,
-    response: categories,
-  } = useFetch<ResponseListStructure<Category>>();
-
-  useEffect(() => {
-    if (data && !genres && !genresLoading) {
-      fetchGenres(data.relationships.genres.links.related);
-    }
-  }, [data, fetchGenres, genres, genresLoading]);
-
-  useEffect(() => {
-    if (data && !categories && !categoriesLoading) {
-      fetchCategories(data.relationships.categories.links.related);
-    }
-  }, [data, fetchCategories, categories, categoriesLoading]);
+  const { data, isLoading } = useGetMangaItemQuery(id);
+  const { isLoading: genresLoading, data: genres } = useGetMangaGenresQuery(id);
+  const { isLoading: categoriesLoading, data: categories } = useGetMangaCategoriesQuery(id);
 
   return (
     <>
-      <ConditionalRender condition={loading}>
+      <ConditionalRender condition={isLoading}>
         <Loading />
       </ConditionalRender>
-      <ConditionalRender condition={!loading}>
+      <ConditionalRender condition={!isLoading}>
         {data && (
           <div className="card-modal-content">
             <div className="card-modal-cover-image">
