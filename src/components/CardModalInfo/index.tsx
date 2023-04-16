@@ -20,10 +20,8 @@ type CardModalInfoProps = {
 
 export const CardModalInfo: React.FC<CardModalInfoProps> = ({ id }) => {
   const { data, isLoading } = useGetMangaItemQuery(id);
-  const { isLoading: genresLoading, data: genres } = useGetMangaGenresQuery(id, { skip: !id });
-  const { isLoading: categoriesLoading, data: categories } = useGetMangaCategoriesQuery(id, {
-    skip: !id,
-  });
+  const { isLoading: genresLoading, data: genres } = useGetMangaGenresQuery(id);
+  const { isLoading: categoriesLoading, data: categories } = useGetMangaCategoriesQuery(id);
 
   return (
     <>
