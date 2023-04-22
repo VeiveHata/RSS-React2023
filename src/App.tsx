@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Provider } from 'react-redux';
-import { store } from './store';
 import NotFound from 'pages/NotFound';
 import { routesPath } from 'consts/router';
 import Forms from 'pages/Forms';
@@ -12,7 +10,7 @@ import { Root } from 'components/Root';
 
 const App: React.FC = () => {
   return (
-    <Provider store={store}>
+    <Suspense fallback={'...Loading'}>
       <Routes>
         <Route path="/" element={<Root />}>
           <Route index element={<Cards />} />
@@ -22,7 +20,7 @@ const App: React.FC = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </Provider>
+    </Suspense>
   );
 };
 

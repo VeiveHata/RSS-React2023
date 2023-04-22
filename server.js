@@ -3,7 +3,7 @@ import express from 'express';
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production';
-const port = process.env.PORT || 5173;
+const port = process.env.PORT || 3000;
 const base = process.env.BASE || '/';
 
 // Cached production assets
@@ -32,11 +32,9 @@ if (!isProduction) {
   app.use(base, sirv('./dist/client', { extensions: [] }));
 }
 
-// Serve HTML
 app.use('*', async (req, res) => {
   try {
-    const url = req.originalUrl.replace(base, '');
-
+    const url = req.originalUrl;
     let template;
     let render;
     if (!isProduction) {
@@ -53,7 +51,14 @@ app.use('*', async (req, res) => {
 
     const html = template
       .replace(`<!--app-head-->`, rendered.head ?? '')
-      .replace(`<!--app-html-->`, rendered.html ?? '');
+      .replace(`<!--app-html-->`, rendered.html ?? '')
+      .replace(
+        `<!--app-state-->`,
+        `window.__PRELOADED_STATE__ = ${JSON.stringify(rendered.preloadedState).replace(
+          /</g,
+          '\\u003c'
+        )}` ?? ''
+      );
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
   } catch (e) {

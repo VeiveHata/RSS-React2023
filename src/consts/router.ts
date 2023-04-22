@@ -1,9 +1,9 @@
 import { Pages, PagesData } from 'types/route';
 
 export const routesPath: Record<Pages, string> = {
-  library: '/library',
-  about: '/about',
-  forms: '/forms',
+  library: 'library',
+  about: 'about',
+  forms: 'forms',
   unknown: '*',
 };
 
