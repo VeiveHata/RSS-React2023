@@ -1,7 +1,7 @@
 import { expect, afterEach } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import matchers from '@testing-library/jest-dom/matchers';
-import { server } from 'mock/server';
+import { server } from '../src/mock/server';
 
 expect.extend(matchers);
 

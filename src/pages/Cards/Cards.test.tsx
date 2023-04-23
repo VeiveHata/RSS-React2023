@@ -1,9 +1,9 @@
 import React from 'react';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import Cards from './index';
 import { pagesData } from 'consts/router';
-import { apiTestMangaItem, mangaList } from 'mock/mangaMock';
+import { apiTestMangaItem, mangaList } from '../../mock/mangaMock';
 import { renderWithProviders } from '../../../tests/utils';
 
 describe('Cards page', () => {

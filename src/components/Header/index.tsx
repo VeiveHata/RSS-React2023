@@ -22,6 +22,7 @@ export const Header: React.FC = () => {
             to={link.path}
             className={`link ${currentPage.name === link.name ? 'ative-link' : ''}`}
             key={link.name}
+            data-testid={link.testId}
           >
             {link.title}
           </Link>
