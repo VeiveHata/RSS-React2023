@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { emptyForm, validFormValues } from 'mock/formMock';
+import { emptyForm, validFormValues } from '../../mock/formMock';
 import { FormField, FormValues } from 'types/form';
 import { Form } from '.';
 

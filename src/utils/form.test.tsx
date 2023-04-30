@@ -9,7 +9,7 @@ import {
   requiredMediaValidation,
   tbaStatusDate,
 } from './form';
-import { emptyForm, validFormValues } from 'mock/formMock';
+import { emptyForm, validFormValues } from '../mock/formMock';
 
 const todayDate = new Date().toString();
 const file = new File(['hello, world'], 'test.txt', { type: 'text/plain' });

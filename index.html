@@ -7,7 +7,12 @@
     <title>RSS React 2023</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/entry-client.tsx"></script>
+    <script>
+      // WARNING: See the following for security issues around embedding JSON in HTML:
+      // https://redux.js.org/usage/server-rendering#security-considerations
+      <!--app-state-->
+    </script>
   </body>
 </html>
